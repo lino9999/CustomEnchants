@@ -1,0 +1,6126 @@
+acid_edge:
+  title: Acid Edge
+  summary: Corrodes the enemy's armor durability with each hit.
+  rarity: EPIC
+  events:
+  - MELEE_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 12
+      delay: 2
+      actions:
+      - mend_armor | -2 -> defender
+    2:
+      rate: 25
+      delay: 2
+      actions:
+      - mend_armor | -2 -> defender
+    3:
+      rate: 39
+      delay: 2
+      actions:
+      - mend_armor | -2 -> defender
+    4:
+      rate: 46
+      delay: 2
+      actions:
+      - mend_armor | -2 -> defender
+aegis_stance:
+  title: Aegis Stance
+  summary: Grants damage resistance briefly when struck.
+  rarity: EPIC
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 5
+      delay: 5
+      actions:
+      - grant_potion | DAMAGE_RESISTANCE | 0 | 60 -> defender
+    2:
+      rate: 9
+      delay: 5
+      actions:
+      - grant_potion | DAMAGE_RESISTANCE | 1 | 60 -> defender
+angler_lore:
+  title: Angler Lore
+  summary: Multiplies experience earned from successful fishing catches.
+  rarity: RARE
+  events:
+  - FISH_CATCH
+  applies-to:
+  - FISHING_ROD
+  tiers:
+    1:
+      rate: 15
+      delay: 12
+      actions:
+      - set_xp_drop | {event.xp}
+    2:
+      rate: 25
+      delay: 12
+      actions:
+      - set_xp_drop | {event.xp}
+    3:
+      rate: 35
+      delay: 12
+      actions:
+      - set_xp_drop | {event.xp}
+anvil_guard:
+  title: Anvil Guard
+  summary: Repairs your armor at the cost of halving outgoing damage.
+  rarity: MYTHIC
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  applies-to:
+  - AXES
+  tiers:
+    1:
+      rate: 9
+      delay: 3
+      actions:
+      - mend_held_item | 3
+      - halve_damage
+      - emit_particles | BLOCK_DUST | 20 | 1
+    2:
+      rate: 15
+      delay: 3
+      actions:
+      - mend_held_item | 3
+      - halve_damage
+      - emit_particles | BLOCK_DUST | 20 | 1
+    3:
+      rate: 23
+      delay: 3
+      actions:
+      - mend_held_item | 3
+      - halve_damage
+      - emit_particles | BLOCK_DUST | 20 | 1
+    4:
+      rate: 31
+      delay: 3
+      actions:
+      - mend_held_item | 4
+      - halve_damage
+      - emit_particles | BLOCK_DUST | 20 | 1
+    5:
+      rate: 39
+      delay: 3
+      actions:
+      - mend_held_item | 4
+      - halve_damage
+      - emit_particles | BLOCK_DUST | 20 | 1
+arbiter_wrath:
+  title: Arbiter Wrath
+  summary: Grants regeneration to you or wither to your foe.
+  rarity: MYTHIC
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - ELYTRA
+  tiers:
+    1:
+      rate: 6
+      delay: 20
+      actions:
+      - grant_potion | POISON | 0 | 100 -> attacker
+      - grant_potion | REGENERATION | 0 | 100 -> defender
+    2:
+      rate: 8
+      delay: 20
+      actions:
+      - grant_potion | POISON | 0 | 100 -> attacker
+      - grant_potion | REGENERATION | 0 | 100 -> defender
+    3:
+      rate: 10
+      delay: 20
+      actions:
+      - grant_potion | POISON | 0 | 100 -> attacker
+      - grant_potion | REGENERATION | 0 | 100 -> defender
+    4:
+      rate: 12
+      delay: 20
+      actions:
+      - grant_potion | POISON | 0 | 100 -> attacker
+      - grant_potion | REGENERATION | 1 | 60 -> defender
+    5:
+      rate: 16
+      delay: 25
+      actions:
+      - grant_potion | POISON | 0 | 100 -> attacker
+      - grant_potion | REGENERATION | 1 | 100 -> defender
+arc_slash:
+  title: Arc Slash
+  summary: Damages nearby enemies around your primary melee target.
+  rarity: EPIC
+  events:
+  - MELEE_HIT
+  applies-to:
+  - AXES
+  tiers:
+    1:
+      rate: 4
+      delay: 8
+      actions:
+      - inflict_damage | [rand | 1..2] -> area[range=2,filter=living]
+    2:
+      rate: 5
+      delay: 8
+      actions:
+      - inflict_damage | [rand | 1..2] -> area[range=2,filter=living]
+    3:
+      rate: 6
+      delay: 9
+      actions:
+      - inflict_damage | [rand | 1..3] -> area[range=3,filter=living]
+    4:
+      rate: 7
+      delay: 9
+      actions:
+      - inflict_damage | [rand | 1..3] -> area[range=4,filter=living]
+    5:
+      rate: 9
+      delay: 10
+      actions:
+      - inflict_damage | [rand | 2..3] -> area[range=5,filter=living]
+    6:
+      rate: 12
+      delay: 12
+      actions:
+      - inflict_damage | [rand | 2..3] -> area[range=6,filter=living]
+    7:
+      rate: 15
+      delay: 14
+      actions:
+      - inflict_damage | [rand | 2..3] -> area[range=7,filter=living]
+archer_bane:
+  title: Archer Bane
+  summary: Deals heavy bonus damage to foes holding a bow.
+  rarity: EPIC
+  events:
+  - RANGED_HIT
+  applies-to:
+  - BOW
+  - CROSSBOW
+  tiers:
+    1:
+      rate: 12
+      delay: 4
+      rules:
+      - '{defender.held_item} = BOW => allow'
+      actions:
+      - boost_damage | [rand | 25..50] -> attacker
+    2:
+      rate: 17
+      delay: 4
+      rules:
+      - '{defender.held_item} = BOW => allow'
+      actions:
+      - boost_damage | [rand | 25..50] -> attacker
+    3:
+      rate: 25
+      delay: 4
+      rules:
+      - '{defender.held_item} = BOW => allow'
+      actions:
+      - boost_damage | [rand | 50..100] -> attacker
+    4:
+      rate: 33
+      delay: 4
+      rules:
+      - '{defender.held_item} = BOW => allow'
+      actions:
+      - boost_damage | [rand | 50..100] -> attacker
+arrow_storm:
+  title: Arrow Storm
+  summary: Rains a volley of arrows down upon your bow target.
+  rarity: EPIC
+  events:
+  - RANGED_HIT
+  - RANGED_MOB_HIT
+  applies-to:
+  - BOW
+  tiers:
+    1:
+      rate: 15
+      delay: 8
+      actions:
+      - volley_arrows -> defender
+    2:
+      rate: 18
+      delay: 8
+      actions:
+      - volley_arrows -> defender
+    3:
+      rate: 22
+      delay: 8
+      actions:
+      - volley_arrows -> defender
+arterial_cut:
+  title: Arterial Cut
+  summary: Inflicts rapid bleeding ticks on your melee target.
+  rarity: EPIC
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  applies-to:
+  - AXES
+  tiers:
+    1:
+      rate: 8
+      delay: 0
+      actions:
+      - grant_potion | SLOW | 0 | 100 -> defender
+      - inflict_damage | [rand | 1..3] -> defender
+      - delay_ticks | 20
+      - inflict_damage | [rand | 1..3] -> defender
+      - delay_ticks | 20
+      - inflict_damage | [rand | 1..3] -> defender
+    2:
+      rate: 15
+      delay: 0
+      actions:
+      - grant_potion | SLOW | 0 | 100 -> defender
+      - inflict_damage | [rand | 1..3] -> defender
+      - delay_ticks | 20
+      - inflict_damage | [rand | 1..3] -> defender
+      - delay_ticks | 20
+      - inflict_damage | [rand | 1..3] -> defender
+    3:
+      rate: 23
+      delay: 0
+      actions:
+      - grant_potion | SLOW | 0 | 100 -> defender
+      - inflict_damage | [rand | 1..3] -> defender
+      - delay_ticks | 20
+      - inflict_damage | [rand | 1..3] -> defender
+      - delay_ticks | 20
+      - inflict_damage | [rand | 1..3] -> defender
+    4:
+      rate: 30
+      delay: 0
+      actions:
+      - grant_potion | SLOW | 0 | 100 -> defender
+      - inflict_damage | [rand | 1..3] -> defender
+      - delay_ticks | 20
+      - inflict_damage | [rand | 1..3] -> defender
+      - delay_ticks | 20
+      - inflict_damage | [rand | 1..3] -> defender
+    5:
+      rate: 44
+      delay: 0
+      actions:
+      - grant_potion | SLOW | 0 | 100 -> defender
+      - inflict_damage | [rand | 1..3] -> defender
+      - delay_ticks | 20
+      - inflict_damage | [rand | 1..3] -> defender
+      - delay_ticks | 20
+      - inflict_damage | [rand | 1..3] -> defender
+    6:
+      rate: 60
+      delay: 0
+      actions:
+      - grant_potion | SLOW | 0 | 100 -> defender
+      - inflict_damage | [rand | 1..3] -> defender
+      - delay_ticks | 20
+      - inflict_damage | [rand | 1..3] -> defender
+      - delay_ticks | 20
+      - inflict_damage | [rand | 1..3] -> defender
+ash_rebirth:
+  title: Ash Rebirth
+  summary: Prevents a fatal blow and restores you to full health.
+  rarity: CELESTIAL
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  - DEFEND_PROJECTILE
+  - FALL_HURT
+  - FIRE_HURT
+  - BLAST_HURT
+  applies-to:
+  - CHESTPLATES
+  tiers:
+    1:
+      rate: 5
+      delay: 60
+      rules:
+      - '{defender.health} <= {event.damage} => allow'
+      actions:
+      - prevent_death -> defender
+    2:
+      rate: 7
+      delay: 60
+      rules:
+      - '{defender.health} <= {event.damage} => allow'
+      actions:
+      - prevent_death -> defender
+    3:
+      rate: 9
+      delay: 60
+      rules:
+      - '{defender.health} <= {event.damage} => allow'
+      actions:
+      - prevent_death -> defender
+axe_bulwark:
+  title: Axe Bulwark
+  summary: Reduces incoming damage from axe-wielding attackers.
+  rarity: EPIC
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 5
+      delay: 3
+      rules:
+      - '{attacker.held_item} contains AXE => allow'
+      actions:
+      - reduce_damage | 2 -> defender
+    2:
+      rate: 8
+      delay: 3
+      rules:
+      - '{attacker.held_item} contains AXE => allow'
+      actions:
+      - reduce_damage | 4 -> defender
+    3:
+      rate: 12
+      delay: 3
+      rules:
+      - '{attacker.held_item} contains AXE => allow'
+      actions:
+      - reduce_damage | 6 -> defender
+    4:
+      rate: 16
+      delay: 3
+      rules:
+      - '{attacker.held_item} contains AXE => allow'
+      actions:
+      - reduce_damage | 8 -> defender
+axe_savagery:
+  title: Axe Savagery
+  summary: Multiplies damage dealt against other axe wielders.
+  rarity: MYTHIC
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  applies-to:
+  - AXES
+  tiers:
+    1:
+      rate: 8
+      delay: 8
+      rules:
+      - '{attacker.held_item} contains AXE => allow'
+      actions:
+      - boost_damage | [rand | 25..100] -> defender
+    2:
+      rate: 15
+      delay: 8
+      rules:
+      - '{attacker.held_item} contains AXE => allow'
+      actions:
+      - boost_damage | [rand | 25..100] -> defender
+    3:
+      rate: 19
+      delay: 8
+      rules:
+      - '{attacker.held_item} contains AXE => allow'
+      actions:
+      - boost_damage | [rand | 25..100] -> defender
+    4:
+      rate: 25
+      delay: 8
+      rules:
+      - '{attacker.held_item} contains AXE => allow'
+      actions:
+      - boost_damage | [rand | 25..100] -> defender
+backfire_brace:
+  title: Backfire Brace
+  summary: Triggers a concussive blast on attackers who shoot you.
+  rarity: MYTHIC
+  events:
+  - DEFEND_PROJECTILE
+  applies-to:
+  - CHESTPLATES
+  tiers:
+    1:
+      rate: 10
+      delay: 8
+      actions:
+      - detonate_tnt | 1 -> attacker
+      - play_sound | ENCHANT_THORNS_HIT | 1 | 1 -> defender
+    2:
+      rate: 15
+      delay: 8
+      actions:
+      - detonate_tnt | 1 -> attacker
+      - play_sound | ENCHANT_THORNS_HIT | 1 | 1 -> defender
+    3:
+      rate: 25
+      delay: 8
+      actions:
+      - detonate_tnt | 1 -> attacker
+      - play_sound | ENCHANT_THORNS_HIT | 1 | 1 -> defender
+barbed_line:
+  title: Barbed Line
+  summary: Inflicts direct damage when hooking an entity with a rod.
+  rarity: EPIC
+  events:
+  - ROD_SNARE
+  applies-to:
+  - FISHING_ROD
+  tiers:
+    1:
+      rate: 100
+      delay: 0
+      actions:
+      - inflict_damage | 2 -> defender
+    2:
+      rate: 100
+      delay: 0
+      actions:
+      - inflict_damage | 4 -> defender
+    3:
+      rate: 100
+      delay: 0
+      actions:
+      - inflict_damage | 6 -> defender
+    4:
+      rate: 100
+      delay: 0
+      actions:
+      - inflict_damage | 9 -> defender
+    5:
+      rate: 100
+      delay: 0
+      actions:
+      - inflict_damage | 12 -> defender
+    6:
+      rate: 100
+      delay: 0
+      actions:
+      - inflict_damage | 15 -> defender
+    7:
+      rate: 100
+      delay: 0
+      actions:
+      - inflict_damage | 19 -> defender
+    8:
+      rate: 100
+      delay: 0
+      actions:
+      - inflict_damage | 23 -> defender
+    9:
+      rate: 100
+      delay: 0
+      actions:
+      - inflict_damage | 27 -> defender
+bastion_weave:
+  title: Bastion Weave
+  summary: Reduces damage taken from all combat sources.
+  rarity: EPIC
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  - DEFEND_PROJECTILE
+  applies-to:
+  - ELYTRA
+  tiers:
+    1:
+      rate: 15
+      delay: 1
+      actions:
+      - reduce_damage | 15
+    2:
+      rate: 45
+      delay: 1
+      actions:
+      - reduce_damage | 25
+    3:
+      rate: 60
+      delay: 1
+      actions:
+      - reduce_damage | 35
+    4:
+      rate: 75
+      delay: 1
+      actions:
+      - reduce_damage | 45
+battle_aura:
+  title: Battle Aura
+  summary: Emits combat particles and sound cues when striking foes.
+  rarity: COMMON
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 20
+      delay: 3
+      actions:
+      - emit_particles | SMOKE_LARGE | 50 | 1 -> defender
+      - play_sound | ENTITY_GHAST_SCREAM
+    2:
+      rate: 40
+      delay: 3
+      actions:
+      - emit_particles | SMOKE_LARGE | 50 | 1 -> defender
+      - play_sound | ENTITY_GHAST_SCREAM
+    3:
+      rate: 60
+      delay: 3
+      actions:
+      - emit_particles | SMOKE_LARGE | 50 | 1 -> defender
+      - play_sound | ENTITY_GHAST_SCREAM
+blade_bulwark:
+  title: Blade Bulwark
+  summary: Reduces incoming damage from sword-wielding attackers.
+  rarity: EPIC
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 4
+      delay: 4
+      rules:
+      - '{defender.held_item} contains SWORD => allow'
+      actions:
+      - reduce_damage | [rand | 1..4] -> defender
+    2:
+      rate: 9
+      delay: 4
+      rules:
+      - '{attacker.held_item} contains SWORD => allow'
+      actions:
+      - reduce_damage | [rand | 8..12] -> defender
+    3:
+      rate: 13
+      delay: 4
+      rules:
+      - '{attacker.held_item} contains SWORD => allow'
+      actions:
+      - reduce_damage | [rand | 12..15] -> defender
+    4:
+      rate: 16
+      delay: 4
+      rules:
+      - '{attacker.held_item} contains SWORD => allow'
+      actions:
+      - reduce_damage | [rand | 15..18] -> defender
+    5:
+      rate: 21
+      delay: 4
+      rules:
+      - '{attacker.held_item} contains SWORD => allow'
+      actions:
+      - reduce_damage | [rand | 18..22] -> defender
+blast_pick:
+  title: Blast Pick
+  summary: Triggers a controlled blast while breaking blocks.
+  rarity: UNCOMMON
+  events:
+  - RANGED_HIT
+  - RANGED_MOB_HIT
+  applies-to:
+  - BOW
+  tiers:
+    1:
+      rate: 20
+      delay: 7
+      actions:
+      - detonate_tnt -> defender
+    2:
+      rate: 30
+      delay: 8
+      actions:
+      - detonate_tnt -> defender
+    3:
+      rate: 40
+      delay: 8
+      actions:
+      - detonate_tnt -> defender
+    4:
+      rate: 50
+      delay: 8
+      actions:
+      - detonate_tnt -> defender
+    5:
+      rate: 60
+      delay: 9
+      actions:
+      - detonate_tnt -> defender
+blast_ward:
+  title: Blast Ward
+  summary: Nullifies explosion damage and mends your health.
+  rarity: EPIC
+  events:
+  - BLAST_HURT
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 25
+      delay: 0
+      actions:
+      - cancel_event
+    2:
+      rate: 50
+      delay: 0
+      actions:
+      - cancel_event
+    3:
+      rate: 75
+      delay: 0
+      actions:
+      - cancel_event
+      - restore_health | [rand | 1..2]
+blaze_coven:
+  title: Blaze Coven
+  summary: Summons blaze guardians to assist you when taking damage.
+  rarity: EPIC
+  events:
+  - DEFEND_HIT
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 2
+      delay: 8
+      actions:
+      - summon_guardian | BLAZE | 8 | 3 -> defender
+    2:
+      rate: 2
+      delay: 8
+      actions:
+      - summon_guardian | BLAZE | 8 | 4 -> defender
+    3:
+      rate: 3
+      delay: 8
+      actions:
+      - summon_guardian | BLAZE | 8 | 4 -> defender
+    4:
+      rate: 5
+      delay: 8
+      actions:
+      - summon_guardian | BLAZE | 8 | 4 -> defender
+    5:
+      rate: 8
+      delay: 8
+      actions:
+      - summon_guardian | BLAZE | 8 | 4 -> defender
+    6:
+      rate: 12
+      delay: 8
+      actions:
+      - summon_guardian | BLAZE | 8 | 4 -> defender
+    7:
+      rate: 15
+      delay: 8
+      actions:
+      - summon_guardian | BLAZE | 8 | 4 -> defender
+    8:
+      rate: 19
+      delay: 8
+      actions:
+      - summon_guardian | BLAZE | 8 | 4 -> defender
+    9:
+      rate: 22
+      delay: 8
+      actions:
+      - summon_guardian | BLAZE | 8 | 4 -> defender
+    10:
+      rate: 27
+      delay: 8
+      actions:
+      - summon_guardian | BLAZE | 8 | 5 -> defender
+blight_ward:
+  title: Blight Ward
+  summary: Inflicts wither decay on melee attackers.
+  rarity: RARE
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 9
+      delay: 3
+      actions:
+      - grant_potion | WITHER | 0 | 60 -> attacker
+    2:
+      rate: 11
+      delay: 3
+      actions:
+      - grant_potion | WITHER | 0 | 100 -> attacker
+    3:
+      rate: 14
+      delay: 3
+      actions:
+      - grant_potion | WITHER | 0 | 140 -> attacker
+    4:
+      rate: 17
+      delay: 3
+      actions:
+      - grant_potion | WITHER | 1 | 60 -> attacker
+    5:
+      rate: 21
+      delay: 3
+      actions:
+      - grant_potion | WITHER | 1 | 100 -> attacker
+blood_frenzy:
+  title: Blood Frenzy
+  summary: Grants strength and mining fatigue during close combat.
+  rarity: UNCOMMON
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  - AXES
+  tiers:
+    1:
+      rate: 4
+      delay: 8
+      actions:
+      - grant_potion | SLOW_DIGGING | 0 | 60 -> attacker
+      - grant_potion | INCREASE_DAMAGE | 0 | 60 -> attacker
+    2:
+      rate: 8
+      delay: 7
+      actions:
+      - grant_potion | SLOW_DIGGING | 0 | 80 -> attacker
+      - grant_potion | INCREASE_DAMAGE | 0 | 80 -> attacker
+    3:
+      rate: 12
+      delay: 6
+      actions:
+      - grant_potion | SLOW_DIGGING | 0 | 100 -> attacker
+      - grant_potion | INCREASE_DAMAGE | 0 | 100 -> attacker
+    4:
+      rate: 16
+      delay: 5
+      actions:
+      - grant_potion | SLOW_DIGGING | 1 | 80 -> attacker
+      - grant_potion | INCREASE_DAMAGE | 1 | 80 -> attacker
+    5:
+      rate: 20
+      delay: 4
+      actions:
+      - grant_potion | SLOW_DIGGING | 1 | 100 -> attacker
+      - grant_potion | INCREASE_DAMAGE | 1 | 100 -> attacker
+bore_drill:
+  title: Bore Drill
+  summary: Carves a directional tunnel ahead of your mining angle.
+  rarity: EPIC
+  events:
+  - BLOCK_BREAK
+  applies-to:
+  - PICKAXES
+  - SHOVELS
+  tiers:
+    1:
+      rate: 10
+      delay: 0
+      actions:
+      - break_block -> tunnel_area[bounds=1x3x5,direction=UP] [when:{player.pitch} <= -30 => allow]
+      - break_block -> tunnel_area[bounds=1x3x5,direction=DOWN] [when:{player.pitch} >= 30 => allow]
+      - break_block -> tunnel_area[bounds=1x3x5,direction=STRAIGHT] [when:{player.pitch} >= -10 && {player.pitch} <= 10 =>
+        allow]
+    2:
+      rate: 20
+      delay: 0
+      actions:
+      - break_block -> tunnel_area[bounds=1x3x5,direction=UP] [when:{player.pitch} <= -30 => allow]
+      - break_block -> tunnel_area[bounds=1x3x5,direction=DOWN] [when:{player.pitch} >= 30 => allow]
+      - break_block -> tunnel_area[bounds=1x3x5,direction=STRAIGHT] [when:{player.pitch} >= -10 && {player.pitch} <= 10 =>
+        allow]
+    3:
+      rate: 30
+      delay: 0
+      actions:
+      - break_block -> tunnel_area[bounds=1x3x5,direction=UP] [when:{player.pitch} <= -30 => allow]
+      - break_block -> tunnel_area[bounds=1x3x5,direction=DOWN] [when:{player.pitch} >= 30 => allow]
+      - break_block -> tunnel_area[bounds=1x3x5,direction=STRAIGHT] [when:{player.pitch} >= -10 && {player.pitch} <= 10 =>
+        allow]
+    4:
+      rate: 40
+      delay: 0
+      actions:
+      - break_block -> tunnel_area[bounds=1x3x5,direction=UP] [when:{player.pitch} <= -30 => allow]
+      - break_block -> tunnel_area[bounds=1x3x5,direction=DOWN] [when:{player.pitch} >= 30 => allow]
+      - break_block -> tunnel_area[bounds=1x3x5,direction=STRAIGHT] [when:{player.pitch} >= -10 && {player.pitch} <= 10 =>
+        allow]
+    5:
+      rate: 50
+      delay: 0
+      actions:
+      - break_block -> tunnel_area[bounds=1x3x5,direction=UP] [when:{player.pitch} <= -30 => allow]
+      - break_block -> tunnel_area[bounds=1x3x5,direction=DOWN] [when:{player.pitch} >= 30 => allow]
+      - break_block -> tunnel_area[bounds=1x3x5,direction=STRAIGHT] [when:{player.pitch} >= -10 && {player.pitch} <= 10 =>
+        allow]
+    6:
+      rate: 60
+      delay: 0
+      actions:
+      - break_block -> tunnel_area[bounds=1x3x5,direction=UP] [when:{player.pitch} <= -30 => allow]
+      - break_block -> tunnel_area[bounds=1x3x5,direction=DOWN] [when:{player.pitch} >= 30 => allow]
+      - break_block -> tunnel_area[bounds=1x3x5,direction=STRAIGHT] [when:{player.pitch} >= -10 && {player.pitch} <= 10 =>
+        allow]
+    7:
+      rate: 70
+      delay: 0
+      actions:
+      - break_block -> tunnel_area[bounds=1x3x5,direction=UP] [when:{player.pitch} <= -30 => allow]
+      - break_block -> tunnel_area[bounds=1x3x5,direction=DOWN] [when:{player.pitch} >= 30 => allow]
+      - break_block -> tunnel_area[bounds=1x3x5,direction=STRAIGHT] [when:{player.pitch} >= -10 && {player.pitch} <= 10 =>
+        allow]
+    8:
+      rate: 80
+      delay: 0
+      actions:
+      - break_block -> tunnel_area[bounds=1x3x5,direction=UP] [when:{player.pitch} <= -30 => allow]
+      - break_block -> tunnel_area[bounds=1x3x5,direction=DOWN] [when:{player.pitch} >= 30 => allow]
+      - break_block -> tunnel_area[bounds=1x3x5,direction=STRAIGHT] [when:{player.pitch} >= -10 && {player.pitch} <= 10 =>
+        allow]
+    9:
+      rate: 100
+      delay: 0
+      actions:
+      - break_block -> tunnel_area[bounds=1x3x5,direction=UP] [when:{player.pitch} <= -30 => allow]
+      - break_block -> tunnel_area[bounds=1x3x5,direction=DOWN] [when:{player.pitch} >= 30 => allow]
+      - break_block -> tunnel_area[bounds=1x3x5,direction=STRAIGHT] [when:{player.pitch} >= -10 && {player.pitch} <= 10 =>
+        allow]
+bow_snatch:
+  title: Bow Snatch
+  summary: Disarms the target's held item when struck by an arrow.
+  rarity: CELESTIAL
+  events:
+  - MELEE_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 2
+      delay: 20
+      actions:
+      - disarm_hand -> defender
+    2:
+      rate: 4
+      delay: 20
+      actions:
+      - disarm_hand -> defender
+    3:
+      rate: 5
+      delay: 20
+      actions:
+      - disarm_hand -> defender
+buckle_snap:
+  title: Buckle Snap
+  summary: Knocks a random piece of armor into the target's inventory.
+  rarity: MYTHIC
+  events:
+  - MELEE_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 0.4
+      delay: 6
+      actions:
+      - strip_random_armor -> defender
+      - send_message | &e&lA piece of your armor was knocked loose! -> defender
+    2:
+      rate: 0.8
+      delay: 6
+      actions:
+      - strip_random_armor -> defender
+      - send_message | &e&lA piece of your armor was knocked loose! -> defender
+    3:
+      rate: 1.0
+      delay: 6
+      actions:
+      - strip_random_armor -> defender
+      - send_message | &e&lA piece of your armor was knocked loose! -> defender
+    4:
+      rate: 1.2
+      delay: 6
+      actions:
+      - strip_random_armor -> defender
+      - send_message | &e&lA piece of your armor was knocked loose! -> defender
+    5:
+      rate: 1.4
+      delay: 6
+      actions:
+      - strip_random_armor -> defender
+      - send_message | &e&lA piece of your armor was knocked loose! -> defender
+    6:
+      rate: 1.6
+      delay: 6
+      actions:
+      - strip_random_armor -> defender
+      - send_message | &e&lA piece of your armor was knocked loose! -> defender
+    7:
+      rate: 1.8
+      delay: 6
+      actions:
+      - strip_random_armor -> defender
+      - send_message | &e&lA piece of your armor was knocked loose! -> defender
+    8:
+      rate: 2
+      delay: 6
+      actions:
+      - strip_random_armor -> defender
+      - send_message | &e&lA piece of your armor was knocked loose! -> defender
+bulwark_plate:
+  title: Bulwark Plate
+  summary: Reduces damage received from enemy bow attacks.
+  rarity: EPIC
+  events:
+  - DEFEND_HIT
+  - DEFEND_PROJECTILE
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 4
+      delay: 4
+      rules:
+      - '{attacker.held_item} = BOW => allow'
+      actions:
+      - reduce_damage | 2 -> defender
+    2:
+      rate: 9
+      delay: 4
+      rules:
+      - '{attacker.held_item} = BOW => allow'
+      actions:
+      - reduce_damage | 4 -> defender
+    3:
+      rate: 12
+      delay: 4
+      rules:
+      - '{attacker.held_item} = BOW => allow'
+      actions:
+      - reduce_damage | 6 -> defender
+    4:
+      rate: 16
+      delay: 4
+      rules:
+      - '{attacker.held_item} = BOW => allow'
+      actions:
+      - reduce_damage | 8 -> defender
+    5:
+      rate: 21
+      delay: 4
+      rules:
+      - '{attacker.held_item} = BOW => allow'
+      actions:
+      - reduce_damage | 10 -> defender
+cinder_draw:
+  title: Cinder Draw
+  summary: Ignites targets struck by your arrows.
+  rarity: RARE
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  - AXES
+  tiers:
+    1:
+      rate: 15
+      delay: 2
+      actions:
+      - emit_particles | BURN | 2 | 20
+      - ignite_target | 2 -> defender
+    2:
+      rate: 30
+      delay: 2
+      actions:
+      - emit_particles | BURN | 2 | 40
+      - ignite_target | 4 -> defender
+    3:
+      rate: 50
+      delay: 2
+      actions:
+      - emit_particles | BURN | 3 | 20
+      - ignite_target | 6 -> defender
+cinder_nova:
+  title: Cinder Nova
+  summary: Ignites nearby entities in a fiery ring when shooting.
+  rarity: EPIC
+  events:
+  - RANGED_HIT
+  - RANGED_MOB_HIT
+  applies-to:
+  - BOW
+  tiers:
+    1:
+      rate: 10
+      delay: 3
+      actions:
+      - launch_fireball -> defender
+    2:
+      rate: 25
+      delay: 3
+      actions:
+      - launch_fireball -> defender
+    3:
+      rate: 35
+      delay: 3
+      actions:
+      - launch_fireball -> defender
+    4:
+      rate: 50
+      delay: 3
+      actions:
+      - launch_fireball -> defender
+    5:
+      rate: 70
+      delay: 3
+      actions:
+      - launch_fireball -> defender
+clear_mind:
+  title: Clear Mind
+  summary: Purges blindness and grants night vision when struck.
+  rarity: MYTHIC
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 22
+      delay: 5
+      actions:
+      - clear_potion | BLINDNESS -> defender
+      - grant_potion | NIGHT_VISION | 0 | 40 -> defender
+    2:
+      rate: 32
+      delay: 5
+      actions:
+      - clear_potion | BLINDNESS -> defender
+      - grant_potion | NIGHT_VISION | 0 | 60 -> defender
+    3:
+      rate: 42
+      delay: 5
+      actions:
+      - clear_potion | BLINDNESS -> defender
+      - grant_potion | NIGHT_VISION | 0 | 80 -> defender
+cleaver_souls:
+  title: Cleaver Souls
+  summary: Harvests souls into your axe upon slaying players.
+  rarity: CELESTIAL
+  events:
+  - PLAYER_SLAY
+  applies-to:
+  - AXES
+  tiers:
+    1:
+      rate: 45
+      delay: 0
+      actions:
+      - harvest_souls | 1
+      - emit_particles | HEART | 1 | 0
+    2:
+      rate: 65
+      delay: 0
+      actions:
+      - harvest_souls | 1
+      - emit_particles | HEART | 1 | 0
+    3:
+      rate: 75
+      delay: 0
+      actions:
+      - harvest_souls | 1
+      - emit_particles | HEART | 1 | 0
+concussive_shot:
+  title: Concussive Shot
+  summary: Creates a blast upon arrow impact.
+  rarity: UNCOMMON
+  events:
+  - RANGED_HIT
+  - RANGED_MOB_HIT
+  applies-to:
+  - CROSSBOW
+  tiers:
+    1:
+      rate: 20
+      delay: 7
+      actions:
+      - detonate_tnt -> defender
+    2:
+      rate: 30
+      delay: 8
+      actions:
+      - detonate_tnt -> defender
+    3:
+      rate: 40
+      delay: 8
+      actions:
+      - detonate_tnt -> defender
+    4:
+      rate: 50
+      delay: 8
+      actions:
+      - detonate_tnt -> defender
+    5:
+      rate: 60
+      delay: 9
+      actions:
+      - detonate_tnt -> defender
+creeping_doom:
+  title: Creeping Doom
+  summary: Summons volatile creepers when struck near death.
+  rarity: UNCOMMON
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - LEGGINGS
+  tiers:
+    1:
+      rate: 13
+      delay: 3
+      rules:
+      - '{defender.health} > 6 => cancel'
+      actions:
+      - summon_guardian | CREEPER | 8 | 1 -> defender
+      - grant_potion | BLINDNESS | 0 | 40 -> attacker
+    2:
+      rate: 17
+      delay: 3
+      rules:
+      - '{defender.health} > 6 => cancel'
+      actions:
+      - summon_guardian | CREEPER | 8 | 1 -> defender
+      - grant_potion | BLINDNESS | 0 | 60 -> attacker
+    3:
+      rate: 24
+      delay: 3
+      rules:
+      - '{defender.health} > 7 => cancel'
+      actions:
+      - summon_guardian | CREEPER | 8 | 1 -> defender
+      - grant_potion | BLINDNESS | 0 | 100 -> attacker
+    4:
+      rate: 30
+      delay: 3
+      rules:
+      - '{defender.health} > 7 => cancel'
+      actions:
+      - summon_guardian | CREEPER | 8 | 1 -> defender
+      - grant_potion | BLINDNESS | 1 | 40 -> attacker
+    5:
+      rate: 38
+      delay: 3
+      rules:
+      - '{defender.health} > 8 => cancel'
+      actions:
+      - summon_guardian | CREEPER | 8 | 2 -> defender
+      - grant_potion | BLINDNESS | 1 | 80 -> attacker
+    6:
+      rate: 46
+      delay: 3
+      rules:
+      - '{defender.health} > 8 => cancel'
+      actions:
+      - summon_guardian | CREEPER | 8 | 2 -> defender
+      - grant_potion | BLINDNESS | 1 | 120 -> attacker
+    7:
+      rate: 55
+      delay: 3
+      rules:
+      - '{defender.health} > 8 => cancel'
+      actions:
+      - summon_guardian | CREEPER | 8 | 2 -> defender
+      - grant_potion | BLINDNESS | 2 | 60 -> attacker
+    8:
+      rate: 69
+      delay: 3
+      rules:
+      - '{defender.health} > 8 => cancel'
+      actions:
+      - summon_guardian | CREEPER | 8 | 3 -> defender
+      - grant_potion | BLINDNESS | 2 | 100 -> attacker
+crimson_thirst:
+  title: Crimson Thirst
+  summary: Restores your health a moment after landing a melee strike.
+  rarity: RARE
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 7
+      delay: 4
+      actions:
+      - delay_ticks | 40
+      - restore_health | [rand | 1..6]
+    2:
+      rate: 12
+      delay: 4
+      actions:
+      - delay_ticks | 40
+      - restore_health | [rand | 1..6]
+    3:
+      rate: 15
+      delay: 4
+      actions:
+      - delay_ticks | 40
+      - restore_health | [rand | 1..6]
+crop_sweep:
+  title: Crop Sweep
+  summary: Harvests mature crops across a surrounding patch at once.
+  rarity: EPIC
+  events:
+  - BLOCK_BREAK
+  applies-to:
+  - HOES
+  tiers:
+    1:
+      rate: 13
+      delay: 0
+      actions:
+      - break_block -> cube_area[size=3,any_tool=true]
+    2:
+      rate: 26
+      delay: 0
+      actions:
+      - break_block -> cube_area[size=3,any_tool=true]
+    3:
+      rate: 36
+      delay: 0
+      actions:
+      - break_block -> cube_area[size=3,any_tool=true]
+    4:
+      rate: 49
+      delay: 0
+      actions:
+      - break_block -> cube_area[size=3,any_tool=true]
+    5:
+      rate: 59
+      delay: 0
+      actions:
+      - break_block -> cube_area[size=3,any_tool=true]
+    6:
+      rate: 72
+      delay: 0
+      actions:
+      - break_block -> cube_area[size=3,any_tool=true]
+    7:
+      rate: 85
+      delay: 0
+      actions:
+      - break_block -> cube_area[size=3,any_tool=true]
+    8:
+      rate: 90
+      delay: 0
+      actions:
+      - break_block -> cube_area[size=3,any_tool=true]
+    9:
+      rate: 100
+      delay: 0
+      actions:
+      - break_block -> cube_area[size=3,any_tool=true]
+crossbow_mastery:
+  title: Crossbow Mastery
+  summary: Increases bolt damage when firing a crossbow.
+  rarity: RARE
+  events:
+  - RANGED_HIT
+  - RANGED_MOB_HIT
+  applies-to:
+  - CROSSBOW
+  tiers:
+    1:
+      rate: 13
+      delay: 3
+      rules:
+      - '{attacker.held_item} = CROSSBOW => allow'
+      actions:
+      - boost_damage | [rand | 50..150] -> defender
+    2:
+      rate: 19
+      delay: 3
+      rules:
+      - '{attacker.held_item} = CROSSBOW => allow'
+      actions:
+      - boost_damage | [rand | 50..150] -> defender
+    3:
+      rate: 25
+      delay: 3
+      rules:
+      - '{attacker.held_item} = CROSSBOW => allow'
+      actions:
+      - boost_damage | [rand | 50..150] -> defender
+    4:
+      rate: 32
+      delay: 3
+      rules:
+      - '{attacker.held_item} = CROSSBOW => allow'
+      actions:
+      - boost_damage | [rand | 50..150] -> defender
+crushing_blow:
+  title: Crushing Blow
+  summary: Doubles the force of a landed strike.
+  rarity: RARE
+  events:
+  - RANGED_HIT
+  - RANGED_MOB_HIT
+  applies-to:
+  - TRIDENT
+  tiers:
+    1:
+      rate: 5
+      delay: 3
+      actions:
+      - double_damage -> defender
+    2:
+      rate: 8
+      delay: 3
+      actions:
+      - double_damage -> defender
+    3:
+      rate: 11
+      delay: 5
+      actions:
+      - double_damage -> defender
+    4:
+      rate: 14
+      delay: 6
+      actions:
+      - double_damage -> defender
+dark_sight:
+  title: Dark Sight
+  summary: Illuminates dark surroundings while wearing the helmet.
+  rarity: COMMON
+  events:
+  - ARMOR_PASSIVE
+  applies-to:
+  - HELMETS
+  tiers:
+    1:
+      rate: 100
+      delay: 0
+      actions:
+      - grant_potion | NIGHT_VISION | 0
+death_anchor:
+  title: Death Anchor
+  summary: Preserves the item in your inventory upon death.
+  rarity: CELESTIAL
+  events:
+  - COMBAT_DEATH
+  - NATURAL_DEATH
+  applies-to:
+  - TOOLS
+  - SWORDS
+  - BOW
+  - CROSSBOW
+  tiers:
+    1:
+      rate: 4
+      delay: 0
+      actions:
+      - retain_on_death
+    2:
+      rate: 6
+      delay: 0
+      actions:
+      - retain_on_death
+    3:
+      rate: 8
+      delay: 0
+      actions:
+      - retain_on_death
+decay_shot:
+  title: Decay Shot
+  summary: Applies wither decay to targets hit by arrows.
+  rarity: UNCOMMON
+  events:
+  - RANGED_HIT
+  - RANGED_MOB_HIT
+  applies-to:
+  - TRIDENT
+  - BOW
+  - CROSSBOW
+  tiers:
+    1:
+      rate: 9
+      delay: 3
+      actions:
+      - grant_potion | WITHER | 0 | 60 -> defender
+    2:
+      rate: 11
+      delay: 3
+      actions:
+      - grant_potion | WITHER | 0 | 100 -> defender
+    3:
+      rate: 14
+      delay: 3
+      actions:
+      - grant_potion | WITHER | 0 | 140 -> defender
+    4:
+      rate: 17
+      delay: 3
+      actions:
+      - grant_potion | WITHER | 1 | 60 -> defender
+    5:
+      rate: 21
+      delay: 3
+      actions:
+      - grant_potion | WITHER | 1 | 100 -> defender
+deep_lung:
+  title: Deep Lung
+  summary: Replenishes oxygen reserves while mining underwater.
+  rarity: COMMON
+  events:
+  - BLOCK_BREAK
+  applies-to:
+  - PICKAXES
+  tiers:
+    1:
+      rate: 30
+      delay: 3
+      actions:
+      - restore_air
+    2:
+      rate: 60
+      delay: 3
+      actions:
+      - restore_air
+discord_bolt:
+  title: Discord Bolt
+  summary: Weakens and slows targets struck by arrows.
+  rarity: MYTHIC
+  events:
+  - RANGED_HIT
+  - RANGED_MOB_HIT
+  applies-to:
+  - TRIDENT
+  tiers:
+    1:
+      rate: 2
+      delay: 40
+      actions:
+      - grant_potion | WITHER | 0 | 60 -> defender
+      - grant_potion | WEAKNESS | 0 | 100 -> defender
+    2:
+      rate: 4
+      delay: 40
+      actions:
+      - grant_potion | WITHER | 1 | 60 -> defender
+      - grant_potion | WEAKNESS | 0 | 5 -> defender
+    3:
+      rate: 6
+      delay: 40
+      actions:
+      - grant_potion | WITHER | 1 | 60 -> defender
+      - grant_potion | WEAKNESS | 0 | 100 -> defender
+    4:
+      rate: 8
+      delay: 40
+      actions:
+      - grant_potion | WITHER | 1 | 60 -> defender
+      - grant_potion | WEAKNESS | 0 | 100 -> defender
+    5:
+      rate: 10
+      delay: 40
+      actions:
+      - grant_potion | WITHER | 1 | 60 -> defender
+      - grant_potion | WEAKNESS | 0 | 100 -> defender
+douse_guard:
+  title: Douse Guard
+  summary: Quenches flames on your body when taking fire damage.
+  rarity: RARE
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  - FIRE_HURT
+  applies-to:
+  - LEGGINGS
+  tiers:
+    1:
+      rate: 20
+      delay: 0
+      actions:
+      - delay_ticks | 1
+      - extinguish_target -> defender
+    2:
+      rate: 60
+      delay: 0
+      actions:
+      - delay_ticks | 1
+      - extinguish_target -> defender
+    3:
+      rate: 80
+      delay: 0
+      actions:
+      - delay_ticks | 1
+      - extinguish_target -> defender
+dread_aura:
+  title: Dread Aura
+  summary: Inflicts weakness and wither on attackers.
+  rarity: MYTHIC
+  events:
+  - DEFEND_HIT
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 2
+      delay: 40
+      actions:
+      - grant_potion | WITHER | 0 | 60 -> attacker
+      - grant_potion | WEAKNESS | 0 | 100 -> attacker
+    2:
+      rate: 4
+      delay: 40
+      actions:
+      - grant_potion | WITHER | 1 | 60 -> attacker
+      - grant_potion | WEAKNESS | 0 | 5 -> attacker
+    3:
+      rate: 6
+      delay: 40
+      actions:
+      - grant_potion | WITHER | 1 | 60 -> attacker
+      - grant_potion | WEAKNESS | 0 | 100 -> attacker
+    4:
+      rate: 8
+      delay: 40
+      actions:
+      - grant_potion | WITHER | 1 | 60 -> attacker
+      - grant_potion | WEAKNESS | 0 | 100 -> attacker
+    5:
+      rate: 10
+      delay: 40
+      actions:
+      - grant_potion | WITHER | 1 | 60 -> attacker
+      - grant_potion | WEAKNESS | 0 | 100 -> attacker
+duelist_render:
+  title: Duelist Render
+  summary: Deals extra damage to foes wielding a bow.
+  rarity: RARE
+  events:
+  - MELEE_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 15
+      delay: 2
+      rules:
+      - '{defender.held_item} contains BOW => allow'
+      actions:
+      - boost_damage | [rand | 45..70] -> attacker
+    2:
+      rate: 25
+      delay: 2
+      rules:
+      - '{defender.held_item} contains BOW => allow'
+      actions:
+      - boost_damage | [rand | 75..90] -> attacker
+    3:
+      rate: 35
+      delay: 2
+      rules:
+      - '{defender.held_item} contains BOW => allow'
+      actions:
+      - boost_damage | [rand | 85..165] -> attacker
+    4:
+      rate: 45
+      delay: 2
+      rules:
+      - '{defender.held_item} contains BOW => allow'
+      actions:
+      - boost_damage | [rand | 105..205]
+    5:
+      rate: 55
+      delay: 2
+      rules:
+      - '{defender.held_item} contains BOW => allow'
+      actions:
+      - boost_damage | [rand | 105..205]
+dull_edge:
+  title: Dull Edge
+  summary: Weakens and fatigues foes upon melee impact.
+  rarity: EPIC
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  applies-to:
+  - AXES
+  tiers:
+    1:
+      rate: 13
+      delay: 0
+      actions:
+      - grant_potion | SLOW_DIGGING | 0 | 100 -> defender
+dusk_shroud:
+  title: Dusk Shroud
+  summary: Blinds and withers struck targets for a brief period.
+  rarity: RARE
+  events:
+  - MELEE_HIT
+  applies-to:
+  - AXES
+  tiers:
+    1:
+      rate: 8
+      delay: 16
+      actions:
+      - grant_potion | WITHER | 0 | 35 -> defender
+      - grant_potion | BLINDNESS | 0 | 35 -> defender
+    2:
+      rate: 10
+      delay: 14
+      actions:
+      - grant_potion | WITHER | 0 | 40 -> defender
+      - grant_potion | BLINDNESS | 0 | 40 -> defender
+    3:
+      rate: 12
+      delay: 12
+      actions:
+      - grant_potion | WITHER | 0 | 50 -> defender
+      - grant_potion | BLINDNESS | 0 | 50 -> defender
+    4:
+      rate: 14
+      delay: 10
+      actions:
+      - grant_potion | WITHER | 0 | 60 -> defender
+      - grant_potion | BLINDNESS | 0 | 60 -> defender
+ember_line:
+  title: Ember Line
+  summary: Ignites targets snared by your fishing hook.
+  rarity: RARE
+  events:
+  - ROD_SNARE
+  applies-to:
+  - FISHING_ROD
+  tiers:
+    1:
+      rate: 25
+      delay: 3
+      actions:
+      - ignite_target | 40 -> defender
+    2:
+      rate: 35
+      delay: 6
+      actions:
+      - ignite_target | 40 -> defender
+    3:
+      rate: 100
+      delay: 8
+      actions:
+      - ignite_target | 40 -> defender
+eternal_edge:
+  title: Eternal Edge
+  summary: Keeps your weapon fully repaired during combat.
+  rarity: CELESTIAL
+  events:
+  - BLOCK_BREAK
+  - MELEE_HIT
+  - MOB_HIT
+  applies-to:
+  - TOOLS
+  tiers:
+    1:
+      rate: 100
+      delay: 0
+      actions:
+      - restore_durability
+excavator:
+  title: Excavator
+  summary: Breaks a 3x3 cube of compatible blocks at once.
+  rarity: EPIC
+  events:
+  - BLOCK_BREAK
+  applies-to:
+  - PICKAXES
+  - SHOVELS
+  tiers:
+    1:
+      rate: 13
+      delay: 0
+      actions:
+      - break_block -> cube_area[size=3]
+    2:
+      rate: 26
+      delay: 0
+      actions:
+      - break_block -> cube_area[size=3]
+    3:
+      rate: 36
+      delay: 0
+      actions:
+      - break_block -> cube_area[size=3]
+    4:
+      rate: 49
+      delay: 0
+      actions:
+      - break_block -> cube_area[size=3]
+    5:
+      rate: 59
+      delay: 0
+      actions:
+      - break_block -> cube_area[size=3]
+    6:
+      rate: 72
+      delay: 0
+      actions:
+      - break_block -> cube_area[size=3]
+    7:
+      rate: 85
+      delay: 0
+      actions:
+      - break_block -> cube_area[size=3]
+    8:
+      rate: 90
+      delay: 0
+      actions:
+      - break_block -> cube_area[size=3]
+    9:
+      rate: 100
+      delay: 0
+      actions:
+      - break_block -> cube_area[size=3]
+feast_edge:
+  title: Feast Edge
+  summary: Restores hunger points while landing attacks.
+  rarity: UNCOMMON
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  - AXES
+  tiers:
+    1:
+      rate: 14
+      delay: 2
+      actions:
+      - restore_hunger | [rand | 1..4] -> attacker
+    2:
+      rate: 18
+      delay: 2
+      actions:
+      - restore_hunger | [rand | 1..4] -> attacker
+    3:
+      rate: 22
+      delay: 2
+      actions:
+      - restore_hunger | [rand | 1..4] -> attacker
+    4:
+      rate: 26
+      delay: 2
+      actions:
+      - restore_hunger | [rand | 1..4] -> attacker
+feather_step:
+  title: Feather Step
+  summary: Cushions landings with a chance to negate fall impact.
+  rarity: EPIC
+  events:
+  - FALL_HURT
+  applies-to:
+  - BOOTS
+  tiers:
+    1:
+      rate: 40
+      delay: 0
+      actions:
+      - cancel_event
+    2:
+      rate: 80
+      delay: 0
+      actions:
+      - cancel_event
+    3:
+      rate: 100
+      delay: 0
+      actions:
+      - cancel_event
+flame_ward:
+  title: Flame Ward
+  summary: Grants permanent fire resistance while worn.
+  rarity: EPIC
+  events:
+  - ARMOR_PASSIVE
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 100
+      delay: 0
+      actions:
+      - grant_potion | FIRE_RESISTANCE | 0
+fleet_foot:
+  title: Fleet Foot
+  summary: Grants a passive movement speed bonus while worn.
+  rarity: MYTHIC
+  events:
+  - ARMOR_PASSIVE
+  applies-to:
+  - BOOTS
+  tiers:
+    1:
+      rate: 100
+      delay: 0
+      actions:
+      - grant_potion | SPEED | 0
+    2:
+      rate: 100
+      delay: 0
+      actions:
+      - grant_potion | SPEED | 1
+    3:
+      rate: 100
+      delay: 0
+      actions:
+      - grant_potion | SPEED | 2
+fortune_tide:
+  title: Fortune Tide
+  summary: Grants temporary luck after reeling in a catch.
+  rarity: EPIC
+  events:
+  - INTERACT_RIGHT
+  applies-to:
+  - FISHING_ROD
+  tiers:
+    1:
+      rate: 75
+      delay: 12
+      actions:
+      - grant_potion | LUCK | 1 | 1000
+    2:
+      rate: 85
+      delay: 12
+      actions:
+      - grant_potion | LUCK | 2 | 1000
+    3:
+      rate: 95
+      delay: 12
+      actions:
+      - grant_potion | LUCK | 3 | 1000
+frost_brand:
+  title: Frost Brand
+  summary: Chills melee targets with lingering slowness.
+  rarity: EPIC
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 15
+      delay: 2
+      actions:
+      - grant_potion | SLOW | 1 | 100 -> defender
+    2:
+      rate: 23
+      delay: 2
+      actions:
+      - grant_potion | SLOW | 1 | 100 -> defender
+    3:
+      rate: 31
+      delay: 2
+      actions:
+      - grant_potion | SLOW | 1 | 100 -> defender
+gill_weave:
+  title: Gill Weave
+  summary: Allows effortless breathing beneath the water surface.
+  rarity: COMMON
+  events:
+  - ARMOR_PASSIVE
+  applies-to:
+  - HELMETS
+  tiers:
+    1:
+      rate: 100
+      delay: 0
+      actions:
+      - grant_potion | WATER_BREATHING | 0
+glacier_edge:
+  title: Glacier Edge
+  summary: Slows targets and inflicts frost damage on melee hits.
+  rarity: EPIC
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 15
+      delay: 12
+      actions:
+      - inflict_damage | 1 -> defender
+      - crimson_burst -> defender
+      - grant_potion | SLOW | 0 | 20 -> defender
+      - delay_ticks | 20
+      - inflict_damage | 1 -> defender
+      - crimson_burst -> defender
+      - delay_ticks | 20
+      - inflict_damage | 1 -> defender
+      - crimson_burst -> defender
+    2:
+      rate: 18
+      delay: 12
+      actions:
+      - inflict_damage | 2 -> defender
+      - crimson_burst -> defender
+      - grant_potion | SLOW | 0 | 40 -> defender
+      - delay_ticks | 20
+      - inflict_damage | 2 -> defender
+      - crimson_burst -> defender
+      - delay_ticks | 20
+      - inflict_damage | 1 -> defender
+      - crimson_burst -> defender
+    3:
+      rate: 19
+      delay: 12
+      actions:
+      - inflict_damage | 3 -> defender
+      - crimson_burst -> defender
+      - grant_potion | SLOW | 0 | 50 -> defender
+      - delay_ticks | 20
+      - inflict_damage | 2 -> defender
+      - crimson_burst -> defender
+      - delay_ticks | 20
+      - inflict_damage | 1 -> defender
+      - crimson_burst -> defender
+    4:
+      rate: 21
+      delay: 13
+      actions:
+      - inflict_damage | 3 -> defender
+      - crimson_burst -> defender
+      - grant_potion | SLOW | 0 | 60 -> defender
+      - delay_ticks | 20
+      - inflict_damage | 2 -> defender
+      - crimson_burst -> defender
+      - delay_ticks | 20
+      - inflict_damage | 2 -> defender
+      - crimson_burst -> defender
+    5:
+      rate: 25
+      delay: 13
+      actions:
+      - inflict_damage | 3 -> defender
+      - crimson_burst -> defender
+      - grant_potion | SLOW | 1 | 60 -> defender
+      - delay_ticks | 20
+      - inflict_damage | 3 -> defender
+      - crimson_burst -> defender
+      - delay_ticks | 20
+      - inflict_damage | 2 -> defender
+      - crimson_burst -> defender
+gourd_visage:
+  title: Gourd Visage
+  summary: Temporarily obscures the target's view with a carved pumpkin.
+  rarity: CELESTIAL
+  events:
+  - MELEE_HIT
+  applies-to:
+  - SWORDS
+  - AXES
+  tiers:
+    1:
+      rate: 1.8
+      delay: 20
+      actions:
+      - mask_vision | 40 -> defender
+      - broadcast_sound | BLOCK_ANVIL_LAND
+    2:
+      rate: 3.6
+      delay: 20
+      actions:
+      - mask_vision | 40 -> defender
+      - broadcast_sound | BLOCK_ANVIL_LAND
+    3:
+      rate: 4.4
+      delay: 20
+      actions:
+      - mask_vision | 60 -> defender
+      - broadcast_sound | BLOCK_ANVIL_LAND
+    4:
+      rate: 5.2
+      delay: 20
+      actions:
+      - mask_vision | 60 -> defender
+      - broadcast_sound | BLOCK_ANVIL_LAND
+    5:
+      rate: 6
+      delay: 20
+      actions:
+      - mask_vision | 80 -> defender
+      - broadcast_sound | BLOCK_ANVIL_LAND
+grain_sower:
+  title: Grain Sower
+  summary: Sows wheat seeds across nearby tilled soil upon use.
+  rarity: EPIC
+  events:
+  - INTERACT_RIGHT
+  applies-to:
+  - HOES
+  tiers:
+    1:
+      rate: 100
+      delay: 3
+      rules:
+      - '{player.sneaking} = true => allow'
+      actions:
+      - sow_seeds | 1
+    2:
+      rate: 100
+      delay: 2
+      rules:
+      - '{player.sneaking} = true => allow'
+      actions:
+      - sow_seeds | 1
+    3:
+      rate: 100
+      delay: 0
+      rules:
+      - '{player.sneaking} = true => allow'
+      actions:
+      - sow_seeds | 1
+grappling_shot:
+  title: Grappling Shot
+  summary: Draws bow targets closer upon arrow impact.
+  rarity: RARE
+  events:
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 30
+      delay: 0
+      actions:
+      - draw_closer | 1 -> defender
+    2:
+      rate: 60
+      delay: 0
+      actions:
+      - draw_closer | 1.5 -> defender
+    3:
+      rate: 100
+      delay: 0
+      actions:
+      - draw_closer | 2 -> defender
+grave_call:
+  title: Grave Call
+  summary: Summons zombie guardians to retaliate when you are hit.
+  rarity: RARE
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - BOOTS
+  tiers:
+    1:
+      rate: 3
+      delay: 6
+      actions:
+      - summon_guardian | ZOMBIE | 8 | 2 -> defender
+    2:
+      rate: 4
+      delay: 6
+      actions:
+      - summon_guardian | ZOMBIE | 8 | 2 -> defender
+    3:
+      rate: 5
+      delay: 6
+      actions:
+      - summon_guardian | ZOMBIE | 8 | 2 -> defender
+    4:
+      rate: 6
+      delay: 6
+      actions:
+      - summon_guardian | ZOMBIE | 8 | 2 -> defender
+    5:
+      rate: 7
+      delay: 6
+      actions:
+      - summon_guardian | ZOMBIE | 8 | 2 -> defender
+    6:
+      rate: 8
+      delay: 6
+      actions:
+      - summon_guardian | ZOMBIE | 8 | 3 -> defender
+    7:
+      rate: 10
+      delay: 6
+      actions:
+      - summon_guardian | ZOMBIE | 8 | 3 -> defender
+    8:
+      rate: 14
+      delay: 6
+      actions:
+      - summon_guardian | ZOMBIE | 8 | 4 -> defender
+    9:
+      rate: 18
+      delay: 6
+      actions:
+      - summon_guardian | ZOMBIE | 8 | 4 -> defender
+    10:
+      rate: 22
+      delay: 6
+      actions:
+      - summon_guardian | ZOMBIE | 8 | 5 -> defender
+grim_burden:
+  title: Grim Burden
+  summary: Inflicts slowness and mining fatigue on melee attackers.
+  rarity: RARE
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 13
+      delay: 0
+      actions:
+      - grant_potion | SLOW_DIGGING | 0 | 100 -> attacker
+    2:
+      rate: 17
+      delay: 15
+      actions:
+      - grant_potion | SLOW_DIGGING | 1 | 100 -> attacker
+guardian_wing:
+  title: Guardian Wing
+  summary: Grants speed when landing after gliding.
+  rarity: EPIC
+  events:
+  - FALL_HURT
+  applies-to:
+  - BOOTS
+  tiers:
+    1:
+      rate: 40
+      delay: 3
+      actions:
+      - grant_potion | SPEED | 0 | 60
+    2:
+      rate: 60
+      delay: 3
+      actions:
+      - grant_potion | SPEED | 1 | 60
+    3:
+      rate: 70
+      delay: 3
+      actions:
+      - grant_potion | SPEED | 2 | 60
+heavy_impact:
+  title: Heavy Impact
+  summary: Deals extra flat damage during melee attacks.
+  rarity: RARE
+  events:
+  - MELEE_HIT
+  applies-to:
+  - AXES
+  tiers:
+    1:
+      rate: 5
+      delay: 5
+      actions:
+      - inflict_damage | 1 -> attacker
+    2:
+      rate: 8
+      delay: 5
+      actions:
+      - inflict_damage | 2 -> attacker
+    3:
+      rate: 10
+      delay: 5
+      actions:
+      - inflict_damage | 3 -> attacker
+    4:
+      rate: 12
+      delay: 5
+      actions:
+      - inflict_damage | 4 -> attacker
+hell_bane:
+  title: Hell Bane
+  summary: Increases damage dealt to Nether-dwelling creatures.
+  rarity: RARE
+  events:
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  - AXES
+  tiers:
+    1:
+      rate: 16
+      delay: 2
+      rules:
+      - '{mob.type} = BLAZE or {mob.type} = ZOMBIFIED_PIGLIN or {mob.type} = ZOMBIFIED_PIGLIN or {mob.type} = GHAST => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    2:
+      rate: 21
+      delay: 2
+      rules:
+      - '{mob.type} = BLAZE or {mob.type} = ZOMBIFIED_PIGLIN or {mob.type} = ZOMBIFIED_PIGLIN or {mob.type} = GHAST => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    3:
+      rate: 29
+      delay: 2
+      rules:
+      - '{mob.type} = BLAZE or {mob.type} = ZOMBIFIED_PIGLIN or {mob.type} = ZOMBIFIED_PIGLIN or {mob.type} = GHAST => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    4:
+      rate: 34
+      delay: 2
+      rules:
+      - '{mob.type} = BLAZE or {mob.type} = ZOMBIFIED_PIGLIN or {mob.type} = ZOMBIFIED_PIGLIN or {mob.type} = GHAST => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    5:
+      rate: 41
+      delay: 2
+      rules:
+      - '{mob.type} = BLAZE or {mob.type} = ZOMBIFIED_PIGLIN or {mob.type} = ZOMBIFIED_PIGLIN or {mob.type} = GHAST => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+hell_prowess:
+  title: Hell Prowess
+  summary: Increases combat damage while fighting in the Nether.
+  rarity: EPIC
+  events:
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 25
+      delay: 0
+      rules:
+      - '{player.world} contains NETHER => allow'
+      actions:
+      - boost_damage | 50
+    2:
+      rate: 50
+      delay: 0
+      rules:
+      - '{player.world} contains NETHER => allow'
+      actions:
+      - boost_damage | 50
+    3:
+      rate: 75
+      delay: 0
+      rules:
+      - '{player.world} contains NETHER => allow'
+      actions:
+      - boost_damage | 50
+hell_volley:
+  title: Hell Volley
+  summary: Sets nearby monsters ablaze when firing arrows.
+  rarity: RARE
+  events:
+  - RANGED_HIT
+  - RANGED_MOB_HIT
+  applies-to:
+  - CROSSBOW
+  tiers:
+    1:
+      rate: 10
+      delay: 3
+      actions:
+      - launch_fireball -> defender
+    2:
+      rate: 25
+      delay: 3
+      actions:
+      - launch_fireball -> defender
+    3:
+      rate: 35
+      delay: 3
+      actions:
+      - launch_fireball -> defender
+    4:
+      rate: 50
+      delay: 3
+      actions:
+      - launch_fireball -> defender
+    5:
+      rate: 70
+      delay: 3
+      actions:
+      - launch_fireball -> defender
+hex_fatigue:
+  title: Hex Fatigue
+  summary: Slows a target's mining and swing speed on hit.
+  rarity: EPIC
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 13
+      delay: 0
+      actions:
+      - grant_potion | SLOW_DIGGING | 0 | 100 -> defender
+    2:
+      rate: 17
+      delay: 15
+      actions:
+      - grant_potion | SLOW_DIGGING | 1 | 100 -> defender
+hex_ward:
+  title: Hex Ward
+  summary: Weakens attackers who land blows against you.
+  rarity: RARE
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 5
+      delay: 2
+      actions:
+      - grant_potion | WEAKNESS | 0 | 60 -> attacker
+    2:
+      rate: 7
+      delay: 2
+      actions:
+      - grant_potion | WEAKNESS | 0 | 100 -> attacker
+    3:
+      rate: 9
+      delay: 2
+      actions:
+      - grant_potion | WEAKNESS | 0 | 140 -> attacker
+    4:
+      rate: 13
+      delay: 2
+      actions:
+      - grant_potion | WEAKNESS | 0 | 60 -> attacker
+    5:
+      rate: 16
+      delay: 2
+      actions:
+      - grant_potion | WEAKNESS | 0 | 100 -> attacker
+    6:
+      rate: 21
+      delay: 2
+      actions:
+      - grant_potion | WEAKNESS | 0 | 120 -> attacker
+horn_rally:
+  title: Horn Rally
+  summary: Summons allied iron golems when sounding a goat horn.
+  rarity: EPIC
+  events:
+  - HORN_USE
+  applies-to:
+  - GOAT_HORN
+  tiers:
+    1:
+      rate: 100
+      delay: 60
+      actions:
+      - summon_guardian | IRON_GOLEM | 3 | 2 | {player.name}'s Sentinel | true -> area[range=5,filter=all]
+    2:
+      rate: 100
+      delay: 45
+      actions:
+      - summon_guardian | IRON_GOLEM | 4 | 2 | {player.name}'s Sentinel | true -> area[range=5,filter=all]
+    3:
+      rate: 100
+      delay: 30
+      actions:
+      - summon_guardian | IRON_GOLEM | 5 | 2 | {player.name}'s Sentinel | true -> area[range=5,filter=all]
+hunter_souls:
+  title: Hunter Souls
+  summary: Harvests souls upon slaying hostile creatures.
+  rarity: CELESTIAL
+  events:
+  - MOB_SLAY
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 30
+      delay: 0
+      actions:
+      - harvest_souls | 1
+      - emit_particles | HEART | 1 | 0
+    2:
+      rate: 60
+      delay: 0
+      actions:
+      - harvest_souls | 1
+      - emit_particles | HEART | 1 | 0
+    3:
+      rate: 90
+      delay: 0
+      actions:
+      - harvest_souls | 1
+      - emit_particles | HEART | 1 | 0
+impact_toss:
+  title: Impact Toss
+  summary: Sends your character tumbling back when absorbing heavy blows.
+  rarity: EPIC
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 10
+      delay: 4
+      actions:
+      - push_away | 0.1 -> defender
+    2:
+      rate: 20
+      delay: 4
+      actions:
+      - push_away | 0.2 -> defender
+    3:
+      rate: 30
+      delay: 4
+      actions:
+      - push_away | 0.3 -> defender
+    4:
+      rate: 50
+      delay: 4
+      actions:
+      - push_away | 0.4 -> defender
+inversion_ward:
+  title: Inversion Ward
+  summary: Poisons your attacker while granting you regeneration.
+  rarity: MYTHIC
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 6
+      delay: 20
+      actions:
+      - grant_potion | POISON | 0 | 100 -> attacker
+      - grant_potion | REGENERATION | 0 | 100 -> defender
+    2:
+      rate: 8
+      delay: 20
+      actions:
+      - grant_potion | POISON | 0 | 100 -> attacker
+      - grant_potion | REGENERATION | 0 | 100 -> defender
+    3:
+      rate: 10
+      delay: 20
+      actions:
+      - grant_potion | POISON | 0 | 100 -> attacker
+      - grant_potion | REGENERATION | 0 | 100 -> defender
+    4:
+      rate: 12
+      delay: 20
+      actions:
+      - grant_potion | POISON | 0 | 100 -> attacker
+      - grant_potion | REGENERATION | 1 | 60 -> defender
+    5:
+      rate: 16
+      delay: 25
+      actions:
+      - grant_potion | POISON | 0 | 100 -> attacker
+      - grant_potion | REGENERATION | 1 | 100 -> defender
+iron_sentinel:
+  title: Iron Sentinel
+  summary: Summons an iron golem sentinel to defend you when hit.
+  rarity: EPIC
+  events:
+  - DEFEND_HIT
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 6
+      delay: 8
+      actions:
+      - summon_guardian | IRON_GOLEM | 8 | 1 -> defender
+    2:
+      rate: 9
+      delay: 8
+      actions:
+      - summon_guardian | IRON_GOLEM | 8 | 1 -> defender
+    3:
+      rate: 13
+      delay: 8
+      actions:
+      - summon_guardian | IRON_GOLEM | 8 | 1 -> defender
+    4:
+      rate: 14
+      delay: 8
+      actions:
+      - summon_guardian | IRON_GOLEM | 8 | 1 -> defender
+    5:
+      rate: 16
+      delay: 9
+      actions:
+      - summon_guardian | IRON_GOLEM | 8 | 1 -> defender
+    6:
+      rate: 17
+      delay: 10
+      actions:
+      - summon_guardian | IRON_GOLEM | 8 | 2 -> defender
+    7:
+      rate: 18
+      delay: 12
+      actions:
+      - summon_guardian | IRON_GOLEM | 8 | 2 -> defender
+    8:
+      rate: 20
+      delay: 12
+      actions:
+      - summon_guardian | IRON_GOLEM | 8 | 3 -> defender
+    9:
+      rate: 22
+      delay: 15
+      actions:
+      - summon_guardian | IRON_GOLEM | 8 | 3 -> defender
+    10:
+      rate: 24
+      delay: 15
+      actions:
+      - summon_guardian | IRON_GOLEM | 8 | 4 -> defender
+iron_stance:
+  title: Iron Stance
+  summary: Absorbs incoming blows when defending in melee.
+  rarity: UNCOMMON
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 3
+      delay: 5
+      actions:
+      - cancel_event
+    2:
+      rate: 7
+      delay: 5
+      actions:
+      - cancel_event
+    3:
+      rate: 11
+      delay: 5
+      actions:
+      - cancel_event
+    4:
+      rate: 15
+      delay: 5
+      actions:
+      - cancel_event
+kiln_touch:
+  title: Kiln Touch
+  summary: Smelts mined ore drops into ingots on the spot.
+  rarity: COMMON
+  events:
+  - BLOCK_BREAK
+  applies-to:
+  - PICKAXES
+  - SHOVELS
+  tiers:
+    1:
+      rate: 33
+      delay: 0
+      actions:
+      - smelt_drops
+    2:
+      rate: 66
+      delay: 0
+      actions:
+      - smelt_drops
+    3:
+      rate: 100
+      delay: 0
+      actions:
+      - smelt_drops
+kinetic_mend:
+  title: Kinetic Mend
+  summary: Repairs held equipment when struck by incoming projectiles.
+  rarity: MYTHIC
+  events:
+  - DEFEND_MOB
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 25
+      delay: 7
+      actions:
+      - mend_held_item | 1 -> defender
+    2:
+      rate: 35
+      delay: 7
+      actions:
+      - mend_held_item | 1 -> defender
+    3:
+      rate: 45
+      delay: 7
+      actions:
+      - mend_held_item | 2 -> defender
+lacerate:
+  title: Lacerate
+  summary: Opens bleeding wounds that damage and slow the defender over time.
+  rarity: MYTHIC
+  events:
+  - MELEE_HIT
+  applies-to:
+  - TRIDENT
+  tiers:
+    1:
+      rate: 5
+      delay: 3
+      actions:
+      - grant_potion | SLOW | 0 | 100 -> defender
+      - inflict_damage | [rand | 1..3] -> defender
+      - send_message | &cYour wounds are bleeding! -> defender
+      - delay_ticks | 20
+      - inflict_damage | [rand | 1..3] -> defender
+      - delay_ticks | 20
+      - inflict_damage | [rand | 1..3] -> defender
+    2:
+      rate: 8
+      delay: 3
+      actions:
+      - grant_potion | SLOW | 0 | 100 -> defender
+      - inflict_damage | [rand | 1..3] -> defender
+      - send_message | &cYour wounds are bleeding! -> defender
+      - delay_ticks | 20
+      - inflict_damage | [rand | 1..3] -> defender
+      - delay_ticks | 20
+      - inflict_damage | [rand | 1..3] -> defender
+    3:
+      rate: 11
+      delay: 5
+      actions:
+      - grant_potion | SLOW | 0 | 100 -> defender
+      - inflict_damage | [rand | 1..3] -> defender
+      - send_message | &cYour wounds are bleeding! -> defender
+      - delay_ticks | 20
+      - inflict_damage | [rand | 1..3] -> defender
+      - delay_ticks | 20
+      - inflict_damage | [rand | 1..3] -> defender
+    4:
+      rate: 14
+      delay: 6
+      actions:
+      - grant_potion | SLOW | 0 | 100 -> defender
+      - inflict_damage | [rand | 1..3] -> defender
+      - send_message | &cYour wounds are bleeding! -> defender
+      - delay_ticks | 20
+      - inflict_damage | [rand | 1..3] -> defender
+      - delay_ticks | 20
+      - inflict_damage | [rand | 1..3] -> defender
+last_stand:
+  title: Last Stand
+  summary: Restores health immediately after surviving a heavy hit.
+  rarity: MYTHIC
+  events:
+  - PLAYER_SLAY
+  - MOB_SLAY
+  applies-to:
+  - AXES
+  - SWORDS
+  tiers:
+    1:
+      rate: 25
+      delay: 5
+      actions:
+      - restore_health | 2 -> attacker
+    2:
+      rate: 35
+      delay: 5
+      actions:
+      - restore_health | 4 -> attacker
+    3:
+      rate: 45
+      delay: 5
+      actions:
+      - restore_health | 6 -> attacker
+lightning_rod:
+  title: Lightning Rod
+  summary: Ignites targets struck by a thrown trident.
+  rarity: RARE
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  - RANGED_HIT
+  - RANGED_MOB_HIT
+  applies-to:
+  - TRIDENT
+  tiers:
+    1:
+      rate: 25
+      delay: 3
+      actions:
+      - ignite_target | 40 -> defender
+    2:
+      rate: 35
+      delay: 6
+      actions:
+      - ignite_target | 40 -> defender
+    3:
+      rate: 15
+      delay: 8
+      actions:
+      - ignite_target | 40 -> defender
+lodestone_pull:
+  title: Lodestone Pull
+  summary: Draws attackers toward you when you take damage.
+  rarity: RARE
+  events:
+  - MELEE_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 30
+      delay: 5
+      actions:
+      - draw_closer | 1 -> defender
+    2:
+      rate: 60
+      delay: 5
+      actions:
+      - draw_closer | 2 -> defender
+    3:
+      rate: 100
+      delay: 5
+      actions:
+      - draw_closer | 3 -> defender
+longshot:
+  title: Longshot
+  summary: Increases arrow damage dealt by bow attacks.
+  rarity: EPIC
+  events:
+  - RANGED_HIT
+  - RANGED_MOB_HIT
+  applies-to:
+  - BOW
+  tiers:
+    1:
+      rate: 13
+      delay: 3
+      rules:
+      - '{attacker.held_item} = BOW => allow'
+      actions:
+      - boost_damage | [rand | 50..150] -> defender
+    2:
+      rate: 19
+      delay: 3
+      rules:
+      - '{attacker.held_item} = BOW => allow'
+      actions:
+      - boost_damage | [rand | 50..150] -> defender
+    3:
+      rate: 25
+      delay: 3
+      rules:
+      - '{attacker.held_item} = BOW => allow'
+      actions:
+      - boost_damage | [rand | 50..150] -> defender
+    4:
+      rate: 32
+      delay: 3
+      rules:
+      - '{attacker.held_item} = BOW => allow'
+      actions:
+      - boost_damage | [rand | 50..150] -> defender
+lucky_lure:
+  title: Lucky Lure
+  summary: Doubles the catch yielded from fishing.
+  rarity: MYTHIC
+  events:
+  - FISH_CATCH
+  applies-to:
+  - FISHING_ROD
+  tiers:
+    1:
+      rate: 15
+      delay: 10
+      actions:
+      - multiply_drops | 1
+    2:
+      rate: 18
+      delay: 15
+      actions:
+      - multiply_drops | 1
+    3:
+      rate: 26
+      delay: 20
+      actions:
+      - multiply_drops | 1
+lumber_cleave:
+  title: Lumber Cleave
+  summary: Fells entire connected tree trunks in a single chop.
+  rarity: EPIC
+  events:
+  - BLOCK_BREAK
+  applies-to:
+  - AXES
+  tiers:
+    1:
+      rate: 15
+      delay: 5
+      actions:
+      - fell_tree -> hit_block
+    2:
+      rate: 35
+      delay: 5
+      actions:
+      - fell_tree -> hit_block
+    3:
+      rate: 55
+      delay: 6
+      actions:
+      - fell_tree -> hit_block
+magma_coat:
+  title: Magma Coat
+  summary: Sets melee attackers ablaze when they strike your armor.
+  rarity: UNCOMMON
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 21
+      delay: 2
+      actions:
+      - ignite_target | 2 -> attacker
+    2:
+      rate: 32
+      delay: 2
+      actions:
+      - ignite_target | 4 -> attacker
+    3:
+      rate: 49
+      delay: 2
+      actions:
+      - ignite_target | 6 -> attacker
+    4:
+      rate: 63
+      delay: 2
+      actions:
+      - ignite_target | 8 -> attacker
+magma_stride:
+  title: Magma Stride
+  summary: Solidifies lava underfoot into passable crust.
+  rarity: MYTHIC
+  events:
+  - ARMOR_PASSIVE
+  applies-to:
+  - BOOTS
+  tiers:
+    1:
+      rate: 100
+      delay: 0
+      actions:
+      - walk_on_lava
+marksman_foil:
+  title: Marksman Foil
+  summary: Deals extra arrow damage to foes wielding a sword.
+  rarity: RARE
+  events:
+  - RANGED_HIT
+  applies-to:
+  - TRIDENT
+  - BOW
+  - CROSSBOW
+  tiers:
+    1:
+      rate: 15
+      delay: 2
+      rules:
+      - '{defender.held_item} contains SWORD => allow'
+      actions:
+      - boost_damage | [rand | 45..70] -> attacker
+    2:
+      rate: 25
+      delay: 2
+      rules:
+      - '{defender.held_item} contains SWORD => allow'
+      actions:
+      - boost_damage | [rand | 75..90] -> attacker
+    3:
+      rate: 35
+      delay: 2
+      rules:
+      - '{defender.held_item} contains SWORD => allow'
+      actions:
+      - boost_damage | [rand | 85..165] -> attacker
+    4:
+      rate: 45
+      delay: 2
+      rules:
+      - '{defender.held_item} contains SWORD => allow'
+      actions:
+      - boost_damage | [rand | 105..205]
+    5:
+      rate: 55
+      delay: 2
+      rules:
+      - '{defender.held_item} contains SWORD => allow'
+      actions:
+      - boost_damage | [rand | 105..205]
+marrow_bane:
+  title: Marrow Bane
+  summary: Deals bonus damage against skeletons.
+  rarity: COMMON
+  events:
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  - AXES
+  tiers:
+    1:
+      rate: 25
+      delay: 2
+      rules:
+      - '{mob.type} = SKELETON => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    2:
+      rate: 50
+      delay: 2
+      rules:
+      - '{mob.type} = SKELETON => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    3:
+      rate: 75
+      delay: 1
+      rules:
+      - '{mob.type} = SKELETON => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+mist_veil:
+  title: Mist Veil
+  summary: Blinds attackers in a cloud of smoke when you are low on health.
+  rarity: RARE
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - HELMETS
+  tiers:
+    1:
+      rate: 9
+      delay: 2
+      rules:
+      - '{defender.health} > 4 => cancel'
+      actions:
+      - emit_particles | CLOUD | 200 | 3 -> defender
+      - grant_potion | BLINDNESS | 0 | 60 -> attacker
+    2:
+      rate: 15
+      delay: 2
+      rules:
+      - '{defender.health} > 4 => cancel'
+      actions:
+      - emit_particles | CLOUD | 200 | 3 -> defender
+      - grant_potion | BLINDNESS | 0 | 60 -> attacker
+    3:
+      rate: 23
+      delay: 2
+      rules:
+      - '{defender.health} > 4 => cancel'
+      actions:
+      - emit_particles | CLOUD | 200 | 3 -> defender
+      - grant_potion | BLINDNESS | 0 | 100 -> attacker
+    4:
+      rate: 28
+      delay: 2
+      rules:
+      - '{defender.health} > 5 => cancel'
+      actions:
+      - emit_particles | CLOUD | 200 | 3 -> defender
+      - grant_potion | BLINDNESS | 0 | 100 -> attacker
+    5:
+      rate: 30
+      delay: 2
+      rules:
+      - '{defender.health} > 5 => cancel'
+      actions:
+      - emit_particles | CLOUD | 200 | 3 -> defender
+      - grant_potion | BLINDNESS | 1 | 60 -> attacker
+    6:
+      rate: 34
+      delay: 2
+      rules:
+      - '{defender.health} > 5 => cancel'
+      actions:
+      - emit_particles | CLOUD | 200 | 3 -> defender
+      - grant_potion | BLINDNESS | 1 | 100 -> attacker
+    7:
+      rate: 36
+      delay: 2
+      rules:
+      - '{defender.health} > 6 => cancel'
+      actions:
+      - emit_particles | CLOUD | 200 | 3 -> defender
+      - grant_potion | BLINDNESS | 1 | 140 -> attacker
+    8:
+      rate: 38
+      delay: 2
+      rules:
+      - '{defender.health} > 6 => cancel'
+      actions:
+      - emit_particles | CLOUD | 200 | 3 -> defender
+      - grant_potion | BLINDNESS | 2 | 120 -> attacker
+monster_slayer:
+  title: Monster Slayer
+  summary: Amplifies melee damage dealt to hostile monsters.
+  rarity: MYTHIC
+  events:
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  - AXES
+  tiers:
+    1:
+      rate: 25
+      delay: 2
+      rules:
+      - '{mob.hostile} = true => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    2:
+      rate: 50
+      delay: 2
+      rules:
+      - '{mob.hostile} = true => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    3:
+      rate: 75
+      delay: 0
+      rules:
+      - '{mob.hostile} = true => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    4:
+      rate: 100
+      delay: 0
+      rules:
+      - '{mob.hostile} = true => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+moon_shroud:
+  title: Moon Shroud
+  summary: Freezes and blinds foes struck during the night.
+  rarity: RARE
+  events:
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 40
+      delay: 0
+      rules:
+      - '{world.is_night} = true => allow'
+      actions:
+      - grant_potion | SLOW | 10 | 400 -> defender
+    2:
+      rate: 70
+      delay: 0
+      rules:
+      - '{world.is_night} = true => allow'
+      actions:
+      - grant_potion | SLOW | 10 | 400 -> defender
+    3:
+      rate: 100
+      delay: 0
+      rules:
+      - '{world.is_night} = true => allow'
+      actions:
+      - grant_potion | SLOW | 10 | 400 -> defender
+nimble_grip:
+  title: Nimble Grip
+  summary: Accelerates attack recovery with a burst of haste.
+  rarity: UNCOMMON
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  - AXES
+  tiers:
+    1:
+      rate: 35
+      delay: 2
+      actions:
+      - grant_potion | FAST_DIGGING | 0 | 60
+    2:
+      rate: 55
+      delay: 2
+      actions:
+      - grant_potion | FAST_DIGGING | 1 | 80
+    3:
+      rate: 75
+      delay: 2
+      actions:
+      - grant_potion | FAST_DIGGING | 2 | 100
+nocturnal_hunt:
+  title: Nocturnal Hunt
+  summary: Increases combat damage dealt during nighttime.
+  rarity: EPIC
+  events:
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 40
+      delay: 0
+      rules:
+      - '{world.is_night} = true => allow'
+      actions:
+      - boost_damage | 25
+    2:
+      rate: 60
+      delay: 0
+      rules:
+      - '{world.is_night} = true => allow'
+      actions:
+      - boost_damage | 35
+    3:
+      rate: 80
+      delay: 0
+      rules:
+      - '{world.is_night} = true => allow'
+      actions:
+      - boost_damage | 45
+null_pulse:
+  title: Null Pulse
+  summary: Temporarily suppresses enemy guardian-summoning enchantments.
+  rarity: MYTHIC
+  events:
+  - DEFEND_HIT
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 10
+      delay: 8
+      actions:
+      - suppress_enchant | iron_sentinel | 4 -> attacker
+      - suppress_enchant | blaze_coven | 4 -> attacker
+      - suppress_enchant | creeping_doom | 4 -> attacker
+      - suppress_enchant | grave_call | 4 -> attacker
+    2:
+      rate: 14
+      delay: 8
+      actions:
+      - suppress_enchant | iron_sentinel | 4 -> attacker
+      - suppress_enchant | blaze_coven | 4 -> attacker
+      - suppress_enchant | creeping_doom | 4 -> attacker
+      - suppress_enchant | grave_call | 4 -> attacker
+    3:
+      rate: 18
+      delay: 8
+      actions:
+      - suppress_enchant | iron_sentinel | 4 -> attacker
+      - suppress_enchant | blaze_coven | 4 -> attacker
+      - suppress_enchant | creeping_doom | 4 -> attacker
+      - suppress_enchant | grave_call | 4 -> attacker
+ore_bounty:
+  title: Ore Bounty
+  summary: Doubles drops from natural ore veins.
+  rarity: CELESTIAL
+  events:
+  - MOB_SLAY
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 15
+      delay: 5
+      actions:
+      - multiply_drops | 1
+    2:
+      rate: 20
+      delay: 5
+      actions:
+      - multiply_drops | 1
+    3:
+      rate: 25
+      delay: 6
+      actions:
+      - multiply_drops | 1
+    4:
+      rate: 28
+      delay: 7
+      actions:
+      - multiply_drops | 1
+    5:
+      rate: 30
+      delay: 8
+      actions:
+      - multiply_drops | 1
+ore_compactor:
+  title: Ore Compactor
+  summary: Compresses mined ore veins directly into refined storage blocks.
+  rarity: CELESTIAL
+  events:
+  - BLOCK_BREAK
+  applies-to:
+  - PICKAXES
+  tiers:
+    1:
+      rate: 3
+      delay: 5
+      rules:
+      - '{block.natural} = true && {block.type} contains ORE => allow'
+      actions:
+      - emit_particles | GLOW | 30 | 0.5 -> hit_block
+      - play_sound | ENTITY_PLAYER_LEVELUP -> self
+      - place_block | GOLD_BLOCK -> hit_block [when:{block.type} contains GOLD_ORE => allow]
+      - place_block | IRON_BLOCK -> hit_block [when:{block.type} contains IRON_ORE => allow]
+      - place_block | COAL_BLOCK -> hit_block [when:{block.type} contains COAL_ORE => allow]
+      - place_block | EMERALD_BLOCK -> hit_block [when:{block.type} contains EMERALD_ORE => allow]
+      - place_block | COPPER_BLOCK -> hit_block [when:{block.type} contains copper_ore => allow]
+      - place_block | REDSTONE_BLOCK -> hit_block [when:{block.type} contains redstone_ore => allow]
+      - place_block | LAPIS_BLOCK -> hit_block [when:{block.type} contains lapis_ore => allow]
+      - place_block | DIAMOND_BLOCK -> hit_block [when:{block.type} contains diamond_ore => allow]
+outcast_bow:
+  title: Outcast Bow
+  summary: Boosts arrow damage against non-hostile targets.
+  rarity: UNCOMMON
+  events:
+  - RANGED_MOB_HIT
+  applies-to:
+  - TRIDENT
+  - BOW
+  - CROSSBOW
+  tiers:
+    1:
+      rate: 25
+      delay: 2
+      rules:
+      - '{mob.hostile} = true => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    2:
+      rate: 50
+      delay: 2
+      rules:
+      - '{mob.hostile} = true => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    3:
+      rate: 75
+      delay: 0
+      rules:
+      - '{mob.hostile} = true => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    4:
+      rate: 100
+      delay: 0
+      rules:
+      - '{mob.hostile} = true => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+pacifier:
+  title: Pacifier
+  summary: Deals bonus damage against passive and neutral creatures.
+  rarity: UNCOMMON
+  events:
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  - AXES
+  tiers:
+    1:
+      rate: 25
+      delay: 2
+      rules:
+      - '{mob.hostile} = false => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    2:
+      rate: 50
+      delay: 2
+      rules:
+      - '{mob.hostile} = false => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    3:
+      rate: 75
+      delay: 0
+      rules:
+      - '{mob.hostile} = false => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    4:
+      rate: 100
+      delay: 0
+      rules:
+      - '{mob.hostile} = false => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+panic_scramble:
+  title: Panic Scramble
+  summary: Scrambles the attacker's hotbar when they hit you.
+  rarity: EPIC
+  events:
+  - MELEE_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 5
+      delay: 15
+      actions:
+      - scramble_hotbar -> defender
+    2:
+      rate: 7
+      delay: 15
+      actions:
+      - scramble_hotbar -> defender
+    3:
+      rate: 9
+      delay: 15
+      actions:
+      - scramble_hotbar -> defender
+parry_stance:
+  title: Parry Stance
+  summary: Reduces incoming melee damage and retaliates against the attacker.
+  rarity: EPIC
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 16
+      delay: 4
+      actions:
+      - absorb_damage | 50 -> defender
+      - inflict_damage | [rand | 1..4] -> attacker
+    2:
+      rate: 22
+      delay: 4
+      actions:
+      - absorb_damage | 50 -> defender
+      - inflict_damage | [rand | 1..4] -> attacker
+    3:
+      rate: 30
+      delay: 4
+      actions:
+      - absorb_damage | 50 -> defender
+      - inflict_damage | [rand | 1..4] -> attacker
+phantom_cloak:
+  title: Phantom Cloak
+  summary: Renders you invisible when your health drops critically low.
+  rarity: EPIC
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 20
+      delay: 20
+      rules:
+      - '{defender.health} > 5 => cancel'
+      actions:
+      - grant_potion | INVISIBILITY | 2 | 60 -> defender
+    2:
+      rate: 23
+      delay: 20
+      rules:
+      - '{defender.health} > 6 => cancel'
+      actions:
+      - grant_potion | INVISIBILITY | 2 | 80 -> defender
+    3:
+      rate: 26
+      delay: 20
+      rules:
+      - '{defender.health} > 7 => cancel'
+      actions:
+      - grant_potion | INVISIBILITY | 2 | 100 -> defender
+    4:
+      rate: 30
+      delay: 20
+      rules:
+      - '{defender.health} > 8 => cancel'
+      actions:
+      - grant_potion | INVISIBILITY | 2 | 120 -> defender
+pinning_shot:
+  title: Pinning Shot
+  summary: Slows and fatigues targets hit by your arrows.
+  rarity: RARE
+  events:
+  - RANGED_HIT
+  - RANGED_MOB_HIT
+  applies-to:
+  - BOW
+  - CROSSBOW
+  tiers:
+    1:
+      rate: 12
+      delay: 3
+      actions:
+      - grant_potion | SLOW | 0 | 80 -> defender
+      - grant_potion | SLOW_DIGGING | 0 | 80 -> defender
+    2:
+      rate: 19
+      delay: 3
+      actions:
+      - grant_potion | SLOW | 0 | 120 -> defender
+      - grant_potion | SLOW_DIGGING | 0 | 120 -> defender
+    3:
+      rate: 24
+      delay: 3
+      actions:
+      - grant_potion | SLOW | 1 | 80 -> defender
+      - grant_potion | SLOW_DIGGING | 1 | 80 -> defender
+    4:
+      rate: 29
+      delay: 3
+      actions:
+      - grant_potion | SLOW | 1 | 120 -> defender
+      - grant_potion | SLOW_DIGGING | 1 | 120 -> defender
+plague_tip:
+  title: Plague Tip
+  summary: Infects bow targets with poison and wither.
+  rarity: UNCOMMON
+  events:
+  - RANGED_MOB_HIT
+  - RANGED_HIT
+  applies-to:
+  - TRIDENT
+  - BOW
+  - CROSSBOW
+  tiers:
+    1:
+      rate: 6
+      delay: 2
+      actions:
+      - grant_potion | POISON | 0 | 80 -> defender
+    2:
+      rate: 22
+      delay: 2
+      actions:
+      - grant_potion | POISON | 0 | 120 -> defender
+    3:
+      rate: 35
+      delay: 2
+      actions:
+      - grant_potion | POISON | 1 | 80 -> defender
+plate_mastery:
+  title: Plate Mastery
+  summary: Reduces damage received from enemy sword strikes.
+  rarity: MYTHIC
+  events:
+  - DEFEND_HIT
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 6
+      delay: 8
+      rules:
+      - '{attacker.held_item} contains SWORD => allow'
+      actions:
+      - reduce_damage | 2 -> attacker
+    2:
+      rate: 12
+      delay: 8
+      rules:
+      - '{attacker.held_item} contains SWORD => allow'
+      actions:
+      - reduce_damage | 4 -> attacker
+    3:
+      rate: 16
+      delay: 8
+      rules:
+      - '{attacker.held_item} contains SWORD => allow'
+      actions:
+      - reduce_damage | 6 -> attacker
+    4:
+      rate: 20
+      delay: 8
+      rules:
+      - '{attacker.held_item} contains SWORD => allow'
+      actions:
+      - reduce_damage | 8 -> attacker
+predator_feast:
+  title: Predator Feast
+  summary: Restores hunger after slaying a hostile creature.
+  rarity: UNCOMMON
+  events:
+  - MOB_SLAY
+  applies-to:
+  - SWORDS
+  - AXES
+  tiers:
+    1:
+      rate: 10
+      delay: 0
+      actions:
+      - restore_hunger | 1
+    2:
+      rate: 15
+      delay: 0
+      actions:
+      - restore_hunger | 1
+    3:
+      rate: 20
+      delay: 0
+      actions:
+      - restore_hunger | 1
+purity_edge:
+  title: Purity Edge
+  summary: Cleanses negative potion effects while fighting.
+  rarity: EPIC
+  events:
+  - MELEE_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 12
+      delay: 8
+      actions:
+      - clear_potion | SLOW -> attacker
+      - clear_potion | CONFUSION -> attacker
+      - clear_potion | BLINDNESS -> attacker
+      - clear_potion | POISON -> attacker
+      - clear_potion | WITHER -> attacker
+      - clear_potion | HUNGER -> attacker
+      - clear_potion | WEAKNESS -> attacker
+      - clear_potion | SLOW_DIGGING -> attacker
+    2:
+      rate: 16
+      delay: 8
+      actions:
+      - clear_potion | SLOW -> attacker
+      - clear_potion | CONFUSION -> attacker
+      - clear_potion | BLINDNESS -> attacker
+      - clear_potion | POISON -> attacker
+      - clear_potion | WITHER -> attacker
+      - clear_potion | HUNGER -> attacker
+      - clear_potion | WEAKNESS -> attacker
+      - clear_potion | SLOW_DIGGING -> attacker
+    3:
+      rate: 22
+      delay: 8
+      actions:
+      - clear_potion | SLOW -> attacker
+      - clear_potion | CONFUSION -> attacker
+      - clear_potion | BLINDNESS -> attacker
+      - clear_potion | POISON -> attacker
+      - clear_potion | WITHER -> attacker
+      - clear_potion | HUNGER -> attacker
+      - clear_potion | WEAKNESS -> attacker
+      - clear_potion | SLOW_DIGGING -> attacker
+    4:
+      rate: 36
+      delay: 8
+      actions:
+      - clear_potion | SLOW -> attacker
+      - clear_potion | CONFUSION -> attacker
+      - clear_potion | BLINDNESS -> attacker
+      - clear_potion | POISON -> attacker
+      - clear_potion | WITHER -> attacker
+      - clear_potion | HUNGER -> attacker
+      - clear_potion | WEAKNESS -> attacker
+      - clear_potion | SLOW_DIGGING -> attacker
+pyre_sweep:
+  title: Pyre Sweep
+  summary: Ignites all nearby monsters during a melee strike.
+  rarity: MYTHIC
+  events:
+  - MELEE_HIT
+  applies-to:
+  - AXES
+  tiers:
+    1:
+      rate: 10
+      delay: 4
+      actions:
+      - emit_particles | FALLING_LAVA | 5 | 0 -> area[range=2,filter=living]
+      - ignite_target | 40 -> area[range=2,filter=living]
+    2:
+      rate: 12
+      delay: 5
+      actions:
+      - emit_particles | FALLING_LAVA | 5 | 0 -> area[range=4,filter=living]
+      - ignite_target | 50 -> area[range=4,filter=living]
+    3:
+      rate: 16
+      delay: 5
+      actions:
+      - emit_particles | FALLING_LAVA | 5 | 0 -> area[range=6,filter=living]
+      - ignite_target | 60 -> area[range=6,filter=living]
+quarry_rush:
+  title: Quarry Rush
+  summary: Grants a burst of speed while mining blocks.
+  rarity: RARE
+  events:
+  - INTERACT_RIGHT
+  applies-to:
+  - ELYTRA
+  tiers:
+    1:
+      rate: 10
+      delay: 5
+      rules:
+      - '{player.held_item} = FIREWORK_ROCKET => allow'
+      actions:
+      - grant_potion | SPEED | 0 | 40
+    2:
+      rate: 25
+      delay: 5
+      rules:
+      - '{player.held_item} = FIREWORK_ROCKET => allow'
+      actions:
+      - grant_potion | SPEED | 1 | 60
+    3:
+      rate: 45
+      delay: 5
+      rules:
+      - '{player.held_item} = FIREWORK_ROCKET => allow'
+      actions:
+      - grant_potion | SPEED | 2 | 80
+quarry_souls:
+  title: Quarry Souls
+  summary: Occasionally harvests souls while mining blocks.
+  rarity: CELESTIAL
+  events:
+  - BLOCK_BREAK
+  applies-to:
+  - PICKAXES
+  tiers:
+    1:
+      rate: 5
+      delay: 0
+      actions:
+      - harvest_souls | 1
+      - emit_particles | HEART | 1 | 0
+    2:
+      rate: 10
+      delay: 0
+      actions:
+      - harvest_souls | 1
+      - emit_particles | HEART | 1 | 0
+    3:
+      rate: 15
+      delay: 0
+      actions:
+      - harvest_souls | 1
+      - emit_particles | HEART | 1 | 0
+quarry_tempo:
+  title: Quarry Tempo
+  summary: Maintains continuous mining haste while holding the tool.
+  rarity: CELESTIAL
+  events:
+  - HAND_PASSIVE
+  applies-to:
+  - PICKAXES
+  - SHOVELS
+  - AXES
+  tiers:
+    1:
+      rate: 100
+      delay: 0
+      actions:
+      - grant_potion | FAST_DIGGING | 0
+    2:
+      rate: 100
+      delay: 0
+      actions:
+      - grant_potion | FAST_DIGGING | 1
+    3:
+      rate: 100
+      delay: 0
+      actions:
+      - grant_potion | FAST_DIGGING | 2
+reaper_sweep:
+  title: Reaper Sweep
+  summary: Executes weak monsters surrounding your target.
+  rarity: MYTHIC
+  events:
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 5
+      delay: 3
+      actions:
+      - emit_particles | SPELL_MOB | 5 | 0 -> area[range=2,filter=mobs]
+      - execute_target | 1 -> area[range=2,filter=mobs]
+    2:
+      rate: 8
+      delay: 4
+      actions:
+      - emit_particles | SPELL_MOB | 5 | 0 -> area[range=2,filter=mobs]
+      - execute_target | 1 -> area[range=2,filter=mobs]
+    3:
+      rate: 12
+      delay: 5
+      actions:
+      - emit_particles | SPELL_MOB | 5 | 0 -> area[range=3,filter=mobs]
+      - execute_target | 1 -> area[range=3,filter=mobs]
+    4:
+      rate: 15
+      delay: 5
+      actions:
+      - emit_particles | SPELL_MOB | 5 | 0 -> area[range=3,filter=mobs]
+      - execute_target | 1 -> area[range=3,filter=mobs]
+    5:
+      rate: 18
+      delay: 6
+      actions:
+      - emit_particles | SPELL_MOB | 5 | 0 -> area[range=4,filter=mobs]
+      - execute_target | 1 -> area[range=4,filter=mobs]
+repulse_ward:
+  title: Repulse Ward
+  summary: Pushes nearby attackers back when taking hits.
+  rarity: COMMON
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 30
+      delay: 12
+      actions:
+      - push_away | 1.0 -> defender
+    2:
+      rate: 36
+      delay: 12
+      actions:
+      - push_away | 1.5 -> defender
+    3:
+      rate: 42
+      delay: 12
+      actions:
+      - push_away | 2.0 -> defender
+    4:
+      rate: 48
+      delay: 13
+      actions:
+      - push_away | 2.5 -> defender
+    5:
+      rate: 54
+      delay: 13
+      actions:
+      - push_away | 3.0 -> defender
+ricochet_plate:
+  title: Ricochet Plate
+  summary: Cancels incoming projectile hits before they deal damage.
+  rarity: EPIC
+  events:
+  - DEFEND_PROJECTILE
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 15
+      delay: 6
+      actions:
+      - cancel_event
+    2:
+      rate: 25
+      delay: 6
+      actions:
+      - cancel_event
+    3:
+      rate: 35
+      delay: 6
+      actions:
+      - cancel_event
+    4:
+      rate: 45
+      delay: 6
+      actions:
+      - cancel_event
+rime_shell:
+  title: Rime Shell
+  summary: Chills attackers with slowness when they strike your armor.
+  rarity: RARE
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 19
+      delay: 6
+      actions:
+      - grant_potion | SLOW | 0 | 40 -> attacker
+    2:
+      rate: 19
+      delay: 6
+      actions:
+      - grant_potion | SLOW | 1 | 50 -> attacker
+    3:
+      rate: 26
+      delay: 6
+      actions:
+      - grant_potion | SLOW | 2 | 60 -> attacker
+root_sower:
+  title: Root Sower
+  summary: Plants carrots across nearby farmland automatically.
+  rarity: EPIC
+  events:
+  - INTERACT_RIGHT
+  applies-to:
+  - HOES
+  tiers:
+    1:
+      rate: 100
+      delay: 3
+      rules:
+      - '{player.sneaking} = true => allow'
+      actions:
+      - sow_seeds | 1 | CARROT
+    2:
+      rate: 100
+      delay: 2
+      rules:
+      - '{player.sneaking} = true => allow'
+      actions:
+      - sow_seeds | 1 | CARROT
+    3:
+      rate: 100
+      delay: 0
+      rules:
+      - '{player.sneaking} = true => allow'
+      actions:
+      - sow_seeds | 2 | CARROT
+rot_bane:
+  title: Rot Bane
+  summary: Deals bonus damage against undead zombies.
+  rarity: COMMON
+  events:
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  - AXES
+  tiers:
+    1:
+      rate: 16
+      delay: 2
+      rules:
+      - '{mob.type} = ZOMBIE => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    2:
+      rate: 20
+      delay: 2
+      rules:
+      - '{mob.type} = ZOMBIE => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    3:
+      rate: 40
+      delay: 2
+      rules:
+      - '{mob.type} = ZOMBIE => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    4:
+      rate: 60
+      delay: 1
+      rules:
+      - '{mob.type} = ZOMBIE => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    5:
+      rate: 80
+      delay: 0
+      rules:
+      - '{mob.type} = ZOMBIE => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+savage_crit:
+  title: Savage Crit
+  summary: Amplifies the damage of critical melee strikes.
+  rarity: RARE
+  events:
+  - MOB_HIT
+  - MELEE_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 7
+      delay: 5
+      rules:
+      - '{event.critical} = true => allow'
+      actions:
+      - boost_damage | 10
+    2:
+      rate: 8
+      delay: 5
+      rules:
+      - '{event.critical} = true => allow'
+      actions:
+      - boost_damage | 15
+    3:
+      rate: 12
+      delay: 5
+      rules:
+      - '{event.critical} = true => allow'
+      actions:
+      - boost_damage | 20
+scholar_edge:
+  title: Scholar Edge
+  summary: Increases experience orbs dropped from mined blocks.
+  rarity: COMMON
+  events:
+  - BLOCK_BREAK
+  applies-to:
+  - PICKAXES
+  - SHOVELS
+  - AXES
+  tiers:
+    1:
+      rate: 15
+      delay: 1
+      rules:
+      - '{block.type} contains ORE => allow'
+      actions:
+      - set_xp_drop | [rand | 2..5] -> hit_block
+    2:
+      rate: 30
+      delay: 2
+      rules:
+      - '{block.type} contains ORE => allow'
+      actions:
+      - set_xp_drop | [rand | 2..5]
+    3:
+      rate: 45
+      delay: 3
+      rules:
+      - '{block.type} contains ORE => allow'
+      actions:
+      - set_xp_drop | [rand | 2..5] -> hit_block
+    4:
+      rate: 60
+      delay: 4
+      rules:
+      - '{block.type} contains ORE => allow'
+      actions:
+      - set_xp_drop | [rand | 2..5] -> hit_block
+    5:
+      rate: 75
+      delay: 5
+      rules:
+      - '{block.type} contains ORE => allow'
+      actions:
+      - set_xp_drop | [rand | 2..5] -> hit_block
+seam_breaker:
+  title: Seam Breaker
+  summary: Excavates connected veins of matching ore in a single swing.
+  rarity: RARE
+  events:
+  - BLOCK_BREAK
+  applies-to:
+  - PICKAXES
+  tiers:
+    1:
+      rate: 15
+      delay: 4
+      actions:
+      - break_block -> vein_area
+    2:
+      rate: 35
+      delay: 3
+      actions:
+      - break_block -> vein_area
+    3:
+      rate: 100
+      delay: 0
+      actions:
+      - break_block -> vein_area
+second_wind:
+  title: Second Wind
+  summary: Repairs a broken tool to half durability by consuming this enchantment.
+  rarity: CELESTIAL
+  events:
+  - TOOL_BREAK
+  applies-to:
+  - PICKAXES
+  - SHOVELS
+  - AXES
+  tiers:
+    1:
+      rate: 40
+      delay: 0
+      actions:
+      - mend_held_item | [round | [calc | ({item.max_durability}/2)]]
+      - strip_enchantment | second_wind
+      - play_sound | ITEM_TOTEM_USE
+    2:
+      rate: 60
+      delay: 0
+      actions:
+      - mend_held_item | [round | [calc | ({item.max_durability}/2)]]
+      - strip_enchantment | second_wind
+      - play_sound | ITEM_TOTEM_USE
+    3:
+      rate: 80
+      delay: 0
+      actions:
+      - mend_held_item | [round | [calc | ({item.max_durability}/2)]]
+      - strip_enchantment | second_wind
+      - play_sound | ITEM_TOTEM_USE
+    4:
+      rate: 100
+      delay: 0
+      actions:
+      - mend_held_item | [round | [calc | ({item.max_durability}/2)]]
+      - strip_enchantment | second_wind
+      - play_sound | ITEM_TOTEM_USE
+seed_cycle:
+  title: Seed Cycle
+  summary: Replants harvested crops using matching seeds from your inventory.
+  rarity: UNCOMMON
+  events:
+  - BLOCK_BREAK
+  applies-to:
+  - HOES
+  tiers:
+    1:
+      rate: 100
+      delay: 0
+      rules:
+      - '{block.is_crop} = false => cancel'
+      - '{block.fully_grown} = false => cancel'
+      actions:
+      - sow_seeds | 0 | {block.drop_type}
+self_mend:
+  title: Self Mend
+  summary: Restores tool or weapon durability while in use.
+  rarity: RARE
+  events:
+  - MOB_HIT
+  - BLOCK_BREAK
+  applies-to:
+  - AXES
+  - SWORDS
+  - PICKAXES
+  - SHOVELS
+  tiers:
+    1:
+      rate: 10
+      delay: 0
+      actions:
+      - mend_source_item | 1
+    2:
+      rate: 20
+      delay: 0
+      actions:
+      - mend_source_item | 1
+    3:
+      rate: 30
+      delay: 0
+      actions:
+      - mend_source_item | 1
+    4:
+      rate: 40
+      delay: 0
+      actions:
+      - mend_source_item | 1
+    5:
+      rate: 50
+      delay: 0
+      actions:
+      - mend_source_item | 1
+    6:
+      rate: 60
+      delay: 0
+      actions:
+      - mend_source_item | 1
+    7:
+      rate: 70
+      delay: 0
+      actions:
+      - mend_source_item | 1
+    8:
+      rate: 80
+      delay: 0
+      actions:
+      - mend_source_item | 1
+    9:
+      rate: 90
+      delay: 0
+      actions:
+      - mend_source_item | 1
+    10:
+      rate: 100
+      delay: 0
+      actions:
+      - mend_source_item | 1
+seraph_grace:
+  title: Seraph Grace
+  summary: Gradually mends your health after taking combat damage.
+  rarity: EPIC
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - CHESTPLATES
+  tiers:
+    1:
+      rate: 9
+      delay: 7
+      actions:
+      - restore_health | [rand | 1..3] -> defender
+    2:
+      rate: 14
+      delay: 9
+      actions:
+      - restore_health | [rand | 1..3] -> defender
+    3:
+      rate: 17
+      delay: 11
+      actions:
+      - restore_health | [rand | 1..3] -> defender
+    4:
+      rate: 26
+      delay: 13
+      actions:
+      - restore_health | [rand | 1..4] -> defender
+    5:
+      rate: 34
+      delay: 15
+      actions:
+      - restore_health | [rand | 1..4] -> defender
+shadow_dart:
+  title: Shadow Dart
+  summary: Obscures the vision of targets struck by arrows.
+  rarity: RARE
+  events:
+  - MELEE_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 17
+      delay: 5
+      actions:
+      - grant_potion | BLINDNESS | 0 | 60 -> defender
+    2:
+      rate: 25
+      delay: 5
+      actions:
+      - grant_potion | BLINDNESS | 1 | 80 -> defender
+    3:
+      rate: 33
+      delay: 5
+      actions:
+      - grant_potion | BLINDNESS | 2 | 100 -> defender
+shaft_splinter:
+  title: Shaft Splinter
+  summary: Deflects arrows while wielding an axe.
+  rarity: EPIC
+  events:
+  - DEFEND_PROJECTILE
+  applies-to:
+  - AXES
+  tiers:
+    1:
+      rate: 15
+      delay: 8
+      actions:
+      - cancel_event
+      - play_sound | ENTITY_ITEM_BREAK | 2 -> defender
+    2:
+      rate: 25
+      delay: 8
+      actions:
+      - cancel_event
+      - play_sound | ENTITY_ITEM_BREAK | 2 -> defender
+    3:
+      rate: 35
+      delay: 8
+      actions:
+      - cancel_event
+      - play_sound | ENTITY_ITEM_BREAK | 2 -> defender
+    4:
+      rate: 45
+      delay: 9
+      actions:
+      - cancel_event
+      - play_sound | ENTITY_ITEM_BREAK | 2 -> defender
+    5:
+      rate: 55
+      delay: 9
+      actions:
+      - cancel_event
+      - play_sound | ENTITY_ITEM_BREAK | 2 -> defender
+    6:
+      rate: 65
+      delay: 10
+      actions:
+      - cancel_event
+      - play_sound | ENTITY_ITEM_BREAK | 2 -> defender
+sidestep:
+  title: Sidestep
+  summary: Grants a higher chance to evade attacks completely, especially while sneaking.
+  rarity: EPIC
+  events:
+  - DEFEND_HIT
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 7
+      delay: 8
+      rules:
+      - '{defender.sneaking} = true => rate +7'
+      actions:
+      - cancel_event
+      - play_sound | ENTITY_BAT_TAKEOFF | 0.7 -> defender
+    2:
+      rate: 12
+      delay: 8
+      rules:
+      - '{defender.sneaking} = true => rate +7'
+      actions:
+      - cancel_event
+      - play_sound | ENTITY_BAT_TAKEOFF | 0.7 -> defender
+    3:
+      rate: 16
+      delay: 8
+      rules:
+      - '{defender.sneaking} = true => rate +7'
+      actions:
+      - cancel_event
+      - play_sound | ENTITY_BAT_TAKEOFF | 0.7 -> defender
+    4:
+      rate: 22
+      delay: 8
+      rules:
+      - '{defender.sneaking} = true => rate +7'
+      actions:
+      - cancel_event
+      - play_sound | ENTITY_BAT_TAKEOFF | 0.7 -> defender
+    5:
+      rate: 27
+      delay: 8
+      rules:
+      - '{defender.sneaking} = true => rate +7'
+      actions:
+      - cancel_event
+      - play_sound | ENTITY_BAT_TAKEOFF | 0.7 -> defender
+skull_piercer:
+  title: Skull Piercer
+  summary: Doubles arrow damage when landing a headshot.
+  rarity: EPIC
+  events:
+  - RANGED_HIT
+  - RANGED_MOB_HIT
+  applies-to:
+  - BOW
+  - CROSSBOW
+  tiers:
+    1:
+      rate: 13
+      delay: 3
+      actions:
+      - boost_damage | [rand | 50..150] -> defender
+    2:
+      rate: 19
+      delay: 3
+      actions:
+      - boost_damage | [rand | 50..150] -> defender
+    3:
+      rate: 25
+      delay: 3
+      actions:
+      - boost_damage | [rand | 50..150] -> defender
+    4:
+      rate: 32
+      delay: 3
+      actions:
+      - boost_damage | [rand | 50..150] -> defender
+    5:
+      rate: 37
+      delay: 3
+      actions:
+      - boost_damage | [rand | 50..150] -> defender
+sky_bolt:
+  title: Sky Bolt
+  summary: Calls down a bolt of lightning onto struck targets.
+  rarity: COMMON
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  - RANGED_HIT
+  - RANGED_MOB_HIT
+  applies-to:
+  - TRIDENT
+  - BOW
+  - CROSSBOW
+  - SWORDS
+  tiers:
+    1:
+      rate: 24
+      delay: 3
+      actions:
+      - strike_lightning -> defender
+    2:
+      rate: 32
+      delay: 3
+      actions:
+      - strike_lightning -> defender
+    3:
+      rate: 40
+      delay: 4
+      actions:
+      - strike_lightning -> defender
+sky_dive:
+  title: Sky Dive
+  summary: Damages nearby monsters when taking fall damage.
+  rarity: EPIC
+  events:
+  - FALL_HURT
+  applies-to:
+  - BOOTS
+  tiers:
+    1:
+      rate: 40
+      delay: 0
+      actions:
+      - inflict_damage | 2 -> area[range=3,filter=mobs]
+    2:
+      rate: 80
+      delay: 0
+      actions:
+      - inflict_damage | 3 -> area[range=5,filter=mobs]
+    3:
+      rate: 100
+      delay: 0
+      actions:
+      - inflict_damage | 5 -> area[range=8,filter=mobs]
+sky_eject:
+  title: Sky Eject
+  summary: Launches you upward out of danger when critically injured.
+  rarity: RARE
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - BOOTS
+  tiers:
+    1:
+      rate: 20
+      delay: 8
+      rules:
+      - '{defender.health} > 6 => cancel'
+      actions:
+      - propel_entity | UP | 20 -> defender
+    2:
+      rate: 34
+      delay: 8
+      rules:
+      - '{defender.health} > 6 => cancel'
+      actions:
+      - propel_entity | UP | 25 -> defender
+    3:
+      rate: 40
+      delay: 8
+      rules:
+      - '{defender.health} > 6 => cancel'
+      actions:
+      - propel_entity | UP | 30 -> defender
+sky_stride:
+  title: Sky Stride
+  summary: Grants sustained flight while wearing enchanted boots.
+  rarity: MYTHIC
+  events:
+  - ARMOR_PASSIVE
+  applies-to:
+  - BOOTS
+  tiers:
+    1:
+      rate: 100
+      delay: 0
+      actions:
+      - enable_flight
+sky_toss:
+  title: Sky Toss
+  summary: Launches struck targets high into the air.
+  rarity: MYTHIC
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - BOOTS
+  tiers:
+    1:
+      rate: 8
+      delay: 10
+      actions:
+      - propel_entity | UP | 5 -> attacker
+    2:
+      rate: 10
+      delay: 10
+      actions:
+      - propel_entity | UP | 6 -> attacker
+    3:
+      rate: 12
+      delay: 10
+      actions:
+      - propel_entity | UP | 7 -> attacker
+    4:
+      rate: 14
+      delay: 10
+      actions:
+      - propel_entity | UP | 8 -> attacker
+    5:
+      rate: 16
+      delay: 10
+      actions:
+      - propel_entity | UP | 9 -> attacker
+    6:
+      rate: 18
+      delay: 10
+      actions:
+      - propel_entity | UP | 10 -> attacker
+snap_reel:
+  title: Snap Reel
+  summary: Reels in fishing catches the moment a bite occurs.
+  rarity: EPIC
+  events:
+  - FISH_BITE
+  applies-to:
+  - FISHING_ROD
+  tiers:
+    1:
+      rate: 25
+      delay: 0
+      actions:
+      - instant_reel
+    2:
+      rate: 50
+      delay: 0
+      actions:
+      - instant_reel
+    3:
+      rate: 75
+      delay: 0
+      actions:
+      - instant_reel
+    4:
+      rate: 100
+      delay: 0
+      actions:
+      - instant_reel
+soul_quarry:
+  title: Soul Quarry
+  summary: Spends item souls to double drops from mined ores.
+  rarity: CELESTIAL
+  events:
+  - BLOCK_BREAK
+  applies-to:
+  - PICKAXES
+  tiers:
+    1:
+      rate: 15
+      delay: 5
+      rules:
+      - '{block.type} contains ORE => allow'
+      - '{item.souls} > 4 => allow'
+      actions:
+      - multiply_drops | 1
+      - consume_souls | 5
+    2:
+      rate: 20
+      delay: 5
+      rules:
+      - '{block.type} contains ORE => allow'
+      - '{item.souls} > 4 => allow'
+      actions:
+      - multiply_drops | 1
+      - consume_souls | 5
+    3:
+      rate: 25
+      delay: 6
+      rules:
+      - '{block.type} contains ORE => allow'
+      - '{item.souls} > 4 => allow'
+      actions:
+      - multiply_drops | 1
+      - consume_souls | 5
+    4:
+      rate: 28
+      delay: 7
+      rules:
+      - '{block.type} contains ORE => allow'
+      - '{item.souls} > 4 => allow'
+      actions:
+      - multiply_drops | 1
+      - consume_souls | 5
+    5:
+      rate: 30
+      delay: 8
+      rules:
+      - '{block.type} contains ORE => allow'
+      - '{item.souls} > 4 => allow'
+      actions:
+      - multiply_drops | 1
+      - consume_souls | 5
+soul_reaver:
+  title: Soul Reaver
+  summary: Harvests souls into your weapon upon slaying players.
+  rarity: CELESTIAL
+  events:
+  - PLAYER_SLAY
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 35
+      delay: 0
+      actions:
+      - harvest_souls | 1
+      - emit_particles | HEART | 1 | 0
+    2:
+      rate: 45
+      delay: 0
+      actions:
+      - harvest_souls | 1
+      - emit_particles | HEART | 1 | 0
+    3:
+      rate: 55
+      delay: 0
+      actions:
+      - harvest_souls | 1
+      - emit_particles | HEART | 1 | 0
+soul_shroud:
+  title: Soul Shroud
+  summary: Spends item souls to blind foes and double your damage.
+  rarity: CELESTIAL
+  events:
+  - MELEE_HIT
+  applies-to:
+  - SWORDS
+  - AXES
+  tiers:
+    1:
+      rate: 8
+      delay: 10
+      rules:
+      - '{item.souls} < 40 => cancel'
+      actions:
+      - consume_souls | 40 -> attacker
+      - boost_damage | 100
+      - grant_potion | BLINDNESS | 0 | 80 -> defender
+      - emit_particles | FLASH | 1 | 0 -> defender
+    2:
+      rate: 10
+      delay: 10
+      rules:
+      - '{item.souls} < 40 => cancel'
+      actions:
+      - consume_souls | 40 -> attacker
+      - grant_potion | BLINDNESS | 1 | 80 -> defender
+      - emit_particles | FLASH | 2 | 0 -> defender
+    3:
+      rate: 12
+      delay: 10
+      actions:
+      - boost_damage | 100
+      - grant_potion | BLINDNESS | 2 | 80 -> defender
+      - emit_particles | FLASH | 3 | 0 -> defender
+    4:
+      rate: 14
+      delay: 10
+      rules:
+      - '{item.souls} < 40 => cancel'
+      actions:
+      - consume_souls | 40 -> attacker
+      - grant_potion | BLINDNESS | 3 | 80 -> defender
+      - emit_particles | FLASH | 4 | 0 -> defender
+soul_siphon:
+  title: Soul Siphon
+  summary: Drains health from your target and transfers it to you.
+  rarity: MYTHIC
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 9
+      delay: 15
+      actions:
+      - drain_health | [rand | 1..3] -> attacker
+    2:
+      rate: 13
+      delay: 15
+      actions:
+      - drain_health | [rand | 1..3] -> attacker
+    3:
+      rate: 17
+      delay: 15
+      actions:
+      - drain_health | [rand | 1..4] -> attacker
+    4:
+      rate: 21
+      delay: 15
+      actions:
+      - drain_health | [rand | 1..5] -> attacker
+    5:
+      rate: 25
+      delay: 15
+      actions:
+      - drain_health | [rand | 1..5] -> attacker
+soul_thruster:
+  title: Soul Thruster
+  summary: Spends item souls while gliding for a burst of speed.
+  rarity: CELESTIAL
+  events:
+  - GLIDE_START
+  applies-to:
+  - ELYTRA
+  tiers:
+    1:
+      rate: 15
+      delay: 5
+      rules:
+      - '{item.souls} < 10 => cancel'
+      actions:
+      - consume_souls | 10
+      - grant_potion | SPEED | 3 | 60
+    2:
+      rate: 25
+      delay: 5
+      rules:
+      - '{item.souls} < 10 => cancel'
+      actions:
+      - consume_souls | 10
+      - grant_potion | SPEED | 4 | 60
+    3:
+      rate: 26
+      delay: 5
+      rules:
+      - '{item.souls} < 10 => cancel'
+      actions:
+      - consume_souls | 10
+      - grant_potion | SPEED | 5 | 60
+spear_thrust:
+  title: Spear Thrust
+  summary: Increases close-range melee damage with a trident.
+  rarity: MYTHIC
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  applies-to:
+  - TRIDENT
+  tiers:
+    1:
+      rate: 5
+      delay: 3
+      actions:
+      - boost_damage | 15
+    2:
+      rate: 10
+      delay: 6
+      actions:
+      - boost_damage | 25
+    3:
+      rate: 15
+      delay: 8
+      actions:
+      - boost_damage | 30
+splinter_shot:
+  title: Splinter Shot
+  summary: Damages the target's armor durability when hit by arrows.
+  rarity: EPIC
+  events:
+  - MELEE_HIT
+  applies-to:
+  - AXES
+  tiers:
+    1:
+      rate: 12
+      delay: 2
+      actions:
+      - mend_armor | -2 -> defender
+    2:
+      rate: 25
+      delay: 2
+      actions:
+      - mend_armor | -2 -> defender
+    3:
+      rate: 39
+      delay: 2
+      actions:
+      - mend_armor | -2 -> defender
+    4:
+      rate: 46
+      delay: 2
+      actions:
+      - mend_armor | -2 -> defender
+stalker_draw:
+  title: Stalker Draw
+  summary: Increases arrow damage against passive creatures.
+  rarity: UNCOMMON
+  events:
+  - RANGED_MOB_HIT
+  applies-to:
+  - TRIDENT
+  - BOW
+  - CROSSBOW
+  tiers:
+    1:
+      rate: 25
+      delay: 2
+      rules:
+      - '{mob.hostile} = false => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    2:
+      rate: 50
+      delay: 2
+      rules:
+      - '{mob.hostile} = false => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    3:
+      rate: 75
+      delay: 0
+      rules:
+      - '{mob.hostile} = false => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    4:
+      rate: 100
+      delay: 0
+      rules:
+      - '{mob.hostile} = false => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+starve_hex:
+  title: Starve Hex
+  summary: Drains the target's stamina with hunger on hit.
+  rarity: UNCOMMON
+  events:
+  - MELEE_HIT
+  applies-to:
+  - SWORDS
+  - AXES
+  tiers:
+    1:
+      rate: 12
+      delay: 8
+      actions:
+      - grant_potion | HUNGER | 0 | 80 -> defender
+    2:
+      rate: 15
+      delay: 8
+      actions:
+      - grant_potion | HUNGER | 0 | 120 -> defender
+    3:
+      rate: 18
+      delay: 8
+      actions:
+      - grant_potion | HUNGER | 1 | 80 -> defender
+    4:
+      rate: 22
+      delay: 8
+      actions:
+      - grant_potion | HUNGER | 1 | 120 -> defender
+static_shock:
+  title: Static Shock
+  summary: Strikes attackers with lightning and immobilizing slowness.
+  rarity: RARE
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  - AXES
+  tiers:
+    1:
+      rate: 7
+      delay: 3
+      actions:
+      - strike_lightning -> defender
+      - extinguish_target -> defender
+      - grant_potion | SLOW | 0 | 60 -> defender
+      - grant_potion | SLOW_DIGGING | 0 | 60 -> defender
+    2:
+      rate: 10
+      delay: 3
+      actions:
+      - strike_lightning -> defender
+      - extinguish_target -> defender
+      - grant_potion | SLOW | 0 | 100 -> defender
+      - grant_potion | SLOW_DIGGING | 0 | 100 -> defender
+    3:
+      rate: 13
+      delay: 3
+      actions:
+      - strike_lightning -> defender
+      - extinguish_target -> defender
+      - grant_potion | SLOW | 1 | 60 -> defender
+      - grant_potion | SLOW_DIGGING | 1 | 60 -> defender
+    4:
+      rate: 16
+      delay: 3
+      actions:
+      - strike_lightning -> defender
+      - extinguish_target -> defender
+      - grant_potion | SLOW | 1 | 100 -> defender
+      - grant_potion | SLOW_DIGGING | 1 | 100 -> defender
+storm_caller:
+  title: Storm Caller
+  summary: Strikes nearby enemies with lightning during melee.
+  rarity: MYTHIC
+  events:
+  - MELEE_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 5
+      delay: 10
+      actions:
+      - strike_lightning -> area[range=5,filter=living]
+    2:
+      rate: 8
+      delay: 12
+      actions:
+      - strike_lightning -> area[range=6,filter=living]
+    3:
+      rate: 12
+      delay: 14
+      actions:
+      - strike_lightning -> area[range=7,filter=living]
+submerged_fury:
+  title: Submerged Fury
+  summary: Doubles melee damage while fighting underwater.
+  rarity: MYTHIC
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  applies-to:
+  - BOOTS
+  tiers:
+    1:
+      rate: 8
+      delay: 3
+      rules:
+      - '{player.underwater} = TRUE => allow'
+      actions:
+      - double_damage
+    2:
+      rate: 13
+      delay: 3
+      rules:
+      - '{player.underwater} = TRUE => allow'
+      actions:
+      - double_damage
+    3:
+      rate: 19
+      delay: 5
+      rules:
+      - '{player.underwater} = TRUE => allow'
+      actions:
+      - double_damage
+    4:
+      rate: 23
+      delay: 5
+      rules:
+      - '{player.underwater} = TRUE => allow'
+      actions:
+      - double_damage
+swift_swing:
+  title: Swift Swing
+  summary: Grants a burst of mining haste after breaking blocks.
+  rarity: COMMON
+  events:
+  - BLOCK_BREAK
+  applies-to:
+  - PICKAXES
+  - SHOVELS
+  - AXES
+  tiers:
+    1:
+      rate: 15
+      delay: 3
+      actions:
+      - grant_potion | FAST_DIGGING | 0 | 40
+    2:
+      rate: 25
+      delay: 3
+      actions:
+      - grant_potion | FAST_DIGGING | 1 | 60
+    3:
+      rate: 45
+      delay: 3
+      actions:
+      - grant_potion | FAST_DIGGING | 2 | 80
+tempered_plate:
+  title: Tempered Plate
+  summary: Repairs your armor durability while taking combat hits.
+  rarity: MYTHIC
+  events:
+  - DEFEND_HIT
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 25
+      delay: 7
+      actions:
+      - mend_held_item | 1 -> defender
+    2:
+      rate: 35
+      delay: 7
+      actions:
+      - mend_held_item | 1 -> defender
+    3:
+      rate: 45
+      delay: 7
+      actions:
+      - mend_held_item | 2 -> defender
+tempest_chain:
+  title: Tempest Chain
+  summary: Calls lightning upon every third consecutive combo strike.
+  rarity: MYTHIC
+  events:
+  - MOB_HIT
+  applies-to:
+  - AXES
+  - SWORDS
+  tiers:
+    1:
+      rate: 25
+      delay: 2
+      rules:
+      - '{attacker.combo} > 2 => allow'
+      actions:
+      - strike_lightning -> defender
+      - reset_combo -> attacker
+    2:
+      rate: 45
+      delay: 2
+      rules:
+      - '{attacker.combo} > 2 => allow'
+      actions:
+      - strike_lightning -> defender
+      - reset_combo -> attacker
+    3:
+      rate: 75
+      delay: 2
+      rules:
+      - '{attacker.combo} > 2 => allow'
+      actions:
+      - strike_lightning -> defender
+      - reset_combo -> attacker
+thorn_mirror:
+  title: Thorn Mirror
+  summary: Reflects a portion of incoming damage back at the attacker.
+  rarity: UNCOMMON
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 3
+      delay: 5
+      actions:
+      - cancel_event
+      - inflict_damage | {event.damage} -> attacker
+      - thorn_burst -> defender
+    2:
+      rate: 4
+      delay: 5
+      actions:
+      - cancel_event
+      - inflict_damage | {event.damage} -> attacker
+      - thorn_burst -> defender
+    3:
+      rate: 5
+      delay: 5
+      actions:
+      - cancel_event
+      - inflict_damage | {event.damage} -> attacker
+      - thorn_burst -> defender
+    4:
+      rate: 6
+      delay: 5
+      actions:
+      - cancel_event
+      - inflict_damage | {event.damage} -> attacker
+      - thorn_burst -> defender
+    5:
+      rate: 7
+      delay: 5
+      actions:
+      - cancel_event
+      - inflict_damage | {event.damage} -> attacker
+      - thorn_burst -> defender
+tide_caller:
+  title: Tide Caller
+  summary: Boosts melee damage dealt while wielding a trident.
+  rarity: RARE
+  events:
+  - RANGED_HIT
+  - RANGED_MOB_HIT
+  applies-to:
+  - TRIDENT
+  tiers:
+    1:
+      rate: 13
+      delay: 3
+      rules:
+      - '{item.type} = TRIDENT => allow'
+      actions:
+      - boost_damage | [rand | 50..150] -> defender
+    2:
+      rate: 19
+      delay: 3
+      rules:
+      - '{item.type} = TRIDENT => allow'
+      actions:
+      - boost_damage | [rand | 50..150] -> defender
+    3:
+      rate: 25
+      delay: 3
+      rules:
+      - '{item.type} = TRIDENT => allow'
+      actions:
+      - boost_damage | [rand | 50..150] -> defender
+    4:
+      rate: 32
+      delay: 3
+      rules:
+      - '{item.type} = TRIDENT => allow'
+      actions:
+      - boost_damage | [rand | 50..150] -> defender
+timeless_tool:
+  title: Timeless Tool
+  summary: Keeps your tool fully repaired while working.
+  rarity: MYTHIC
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  - RANGED_HIT
+  - RANGED_MOB_HIT
+  applies-to:
+  - SWORDS
+  - BOW
+  tiers:
+    1:
+      rate: 100
+      delay: 0
+      actions:
+      - restore_durability -> attacker
+titan_hide:
+  title: Titan Hide
+  summary: Absorbs a flat amount of damage from incoming hits.
+  rarity: MYTHIC
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - CHESTPLATES
+  tiers:
+    1:
+      rate: 5
+      delay: 10
+      actions:
+      - absorb_damage | 10 -> defender
+    2:
+      rate: 10
+      delay: 10
+      actions:
+      - absorb_damage | 20 -> defender
+    3:
+      rate: 12
+      delay: 10
+      actions:
+      - absorb_damage | 30 -> defender
+    4:
+      rate: 15
+      delay: 10
+      actions:
+      - absorb_damage | 40 -> defender
+    5:
+      rate: 18
+      delay: 10
+      actions:
+      - absorb_damage | 50 -> defender
+    6:
+      rate: 20
+      delay: 10
+      actions:
+      - absorb_damage | 60 -> defender
+toxic_carapace:
+  title: Toxic Carapace
+  summary: Poisons attackers who strike your armor.
+  rarity: RARE
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  - DEFEND_PROJECTILE
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 8
+      delay: 6
+      actions:
+      - grant_potion | POISON | 0 | 60 -> attacker
+    2:
+      rate: 12
+      delay: 6
+      actions:
+      - grant_potion | POISON | 0 | 120 -> attacker
+    3:
+      rate: 17
+      delay: 6
+      actions:
+      - grant_potion | POISON | 1 | 60 -> attacker
+    4:
+      rate: 23
+      delay: 6
+      actions:
+      - grant_potion | POISON | 1 | 120 -> attacker
+tremor_plate:
+  title: Tremor Plate
+  summary: Knocks attackers backward when they strike your chestplate.
+  rarity: RARE
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - CHESTPLATES
+  tiers:
+    1:
+      rate: 10
+      delay: 4
+      rules:
+      - '{defender.health} > 5 => cancel'
+      actions:
+      - push_away | 0.5 -> attacker
+    2:
+      rate: 20
+      delay: 4
+      rules:
+      - '{defender.health} > 5 => cancel'
+      actions:
+      - push_away | 1.0 -> attacker
+    3:
+      rate: 30
+      delay: 4
+      rules:
+      - '{defender.health} > 5 => cancel'
+      actions:
+      - push_away | 1.5 -> attacker
+    4:
+      rate: 40
+      delay: 4
+      rules:
+      - '{defender.health} > 5 => cancel'
+      actions:
+      - push_away | 2.0 -> attacker
+    5:
+      rate: 50
+      delay: 4
+      rules:
+      - '{defender.health} > 5 => cancel'
+      actions:
+      - push_away | 2.5 -> attacker
+trident_pin:
+  title: Trident Pin
+  summary: Doubles trident damage on a direct headshot.
+  rarity: MYTHIC
+  events:
+  - RANGED_HIT
+  - RANGED_MOB_HIT
+  applies-to:
+  - TRIDENT
+  tiers:
+    1:
+      rate: 15
+      delay: 5
+      rules:
+      - '{event.headshot} = true => allow'
+      actions:
+      - boost_damage | 100 -> attacker
+    2:
+      rate: 20
+      delay: 5
+      rules:
+      - '{event.headshot} = true => allow'
+      actions:
+      - boost_damage | 100 -> attacker
+    3:
+      rate: 25
+      delay: 5
+      rules:
+      - '{event.headshot} = false => cancel'
+      actions:
+      - boost_damage | 100 -> attacker
+    4:
+      rate: 30
+      delay: 5
+      rules:
+      - '{event.headshot} = false => cancel'
+      actions:
+      - boost_damage | 100 -> attacker
+    5:
+      rate: 35
+      delay: 5
+      rules:
+      - '{event.headshot} = false => cancel'
+      actions:
+      - boost_damage | 100 -> attacker
+trophy_claim:
+  title: Trophy Claim
+  summary: Grants a chance to claim a fallen player's skull.
+  rarity: COMMON
+  events:
+  - PLAYER_SLAY
+  applies-to:
+  - SWORDS
+  - AXES
+  tiers:
+    1:
+      rate: 5
+      delay: 10
+      actions:
+      - drop_trophy_head -> defender
+    2:
+      rate: 10
+      delay: 10
+      actions:
+      - drop_trophy_head -> defender
+    3:
+      rate: 15
+      delay: 10
+      actions:
+      - drop_trophy_head -> defender
+tuber_sower:
+  title: Tuber Sower
+  summary: Plants potatoes across nearby farmland automatically.
+  rarity: EPIC
+  events:
+  - INTERACT_RIGHT
+  applies-to:
+  - HOES
+  tiers:
+    1:
+      rate: 100
+      delay: 3
+      rules:
+      - '{player.sneaking} = true => allow'
+      actions:
+      - sow_seeds | 1 | POTATO
+    2:
+      rate: 100
+      delay: 2
+      rules:
+      - '{player.sneaking} = true => allow'
+      actions:
+      - sow_seeds | 1 | POTATO
+    3:
+      rate: 100
+      delay: 0
+      rules:
+      - '{player.sneaking} = true => allow'
+      actions:
+      - sow_seeds | 1 | POTATO
+twin_slash:
+  title: Twin Slash
+  summary: Echoes your melee hit a second time.
+  rarity: MYTHIC
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 8
+      delay: 15
+      actions:
+      - delay_ticks | 20
+      - inflict_damage | {event.damage} -> defender
+      - crimson_burst -> defender
+    2:
+      rate: 13
+      delay: 15
+      actions:
+      - delay_ticks | 20
+      - inflict_damage | {event.damage} -> defender
+      - crimson_burst -> defender
+    3:
+      rate: 19
+      delay: 15
+      actions:
+      - delay_ticks | 20
+      - inflict_damage | {event.damage} -> defender
+      - crimson_burst -> defender
+unyielding_plate:
+  title: Unyielding Plate
+  summary: Prevents your armor from losing durability on hit.
+  rarity: CELESTIAL
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 12
+      delay: 40
+      actions:
+      - mend_armor | 10 -> defender
+    2:
+      rate: 18
+      delay: 40
+      actions:
+      - mend_armor | 10 -> defender
+    3:
+      rate: 25
+      delay: 40
+      actions:
+      - mend_armor | 10 -> defender
+    4:
+      rate: 31
+      delay: 40
+      actions:
+      - mend_armor | 10 -> defender
+updraft:
+  title: Updraft
+  summary: Propels you upward when right-clicking with a firework.
+  rarity: MYTHIC
+  events:
+  - INTERACT_RIGHT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 20
+      delay: 15
+      actions:
+      - propel_entity | UP | 8
+      - emit_particles | CLOUD | 20 | 2
+    2:
+      rate: 27
+      delay: 15
+      actions:
+      - propel_entity | UP | 9
+      - emit_particles | CLOUD | 20 | 2
+    3:
+      rate: 35
+      delay: 10
+      actions:
+      - propel_entity | UP | 10
+      - emit_particles | CLOUD | 20 | 2
+vault_retreat:
+  title: Vault Retreat
+  summary: Propels you away from attackers and grants regeneration.
+  rarity: EPIC
+  events:
+  - MELEE_HIT
+  applies-to:
+  - SWORDS
+  - AXES
+  tiers:
+    1:
+      rate: 16
+      delay: 6
+      actions:
+      - push_away | 3.0 -> defender
+      - grant_potion | REGENERATION | 0 | 20 -> attacker
+    2:
+      rate: 20
+      delay: 6
+      actions:
+      - push_away | 4.5 -> defender
+      - grant_potion | REGENERATION | 0 | 20 -> attacker
+    3:
+      rate: 24
+      delay: 6
+      actions:
+      - push_away | 5.0 -> defender
+      - grant_potion | REGENERATION | 1 | 20 -> attacker
+    4:
+      rate: 28
+      delay: 6
+      actions:
+      - push_away | 6.5 -> defender
+      - grant_potion | REGENERATION | 1 | 40 -> attacker
+vault_step:
+  title: Vault Step
+  summary: Grants a continuous jump boost while wearing enchanted boots.
+  rarity: RARE
+  events:
+  - ARMOR_PASSIVE
+  applies-to:
+  - BOOTS
+  tiers:
+    1:
+      rate: 100
+      delay: 0
+      actions:
+      - grant_potion | JUMP | 0
+    2:
+      rate: 100
+      delay: 0
+      actions:
+      - grant_potion | JUMP | 1
+    3:
+      rate: 100
+      delay: 0
+      actions:
+      - grant_potion | JUMP | 2
+venom_line:
+  title: Venom Line
+  summary: Poisons targets snared by your fishing hook.
+  rarity: RARE
+  events:
+  - ROD_SNARE
+  applies-to:
+  - FISHING_ROD
+  tiers:
+    1:
+      rate: 6
+      delay: 2
+      actions:
+      - grant_potion | POISON | 0 | 80 -> defender
+    2:
+      rate: 22
+      delay: 2
+      actions:
+      - grant_potion | POISON | 0 | 120 -> defender
+    3:
+      rate: 35
+      delay: 2
+      actions:
+      - grant_potion | POISON | 1 | 80 -> defender
+vertigo_strike:
+  title: Vertigo Strike
+  summary: Disorients targets with nausea upon melee impact.
+  rarity: EPIC
+  events:
+  - MELEE_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 12
+      delay: 6
+      actions:
+      - grant_potion | CONFUSION | 0 | 60 -> defender
+    2:
+      rate: 14
+      delay: 7
+      actions:
+      - grant_potion | CONFUSION | 1 | 60 -> defender
+    3:
+      rate: 16
+      delay: 8
+      actions:
+      - grant_potion | CONFUSION | 2 | 60 -> defender
+    4:
+      rate: 18
+      delay: 8
+      actions:
+      - grant_potion | CONFUSION | 3 | 60 -> defender
+victor_feast:
+  title: Victor Feast
+  summary: Restores hunger after defeating an enemy player.
+  rarity: RARE
+  events:
+  - BLOCK_BREAK
+  applies-to:
+  - PICKAXES
+  tiers:
+    1:
+      rate: 30
+      delay: 0
+      actions:
+      - restore_hunger | 1
+    2:
+      rate: 40
+      delay: 0
+      actions:
+      - restore_hunger | 2
+    3:
+      rate: 60
+      delay: 0
+      actions:
+      - restore_hunger | 3
+viper_edge:
+  title: Viper Edge
+  summary: Coats your weapon in venom that poisons struck foes.
+  rarity: RARE
+  events:
+  - MELEE_HIT
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  - AXES
+  tiers:
+    1:
+      rate: 6
+      delay: 2
+      actions:
+      - grant_potion | POISON | 0 | 80 -> defender
+    2:
+      rate: 22
+      delay: 2
+      actions:
+      - grant_potion | POISON | 0 | 120 -> defender
+    3:
+      rate: 35
+      delay: 2
+      actions:
+      - grant_potion | POISON | 1 | 80 -> defender
+vital_shot:
+  title: Vital Shot
+  summary: Multiplies projectile damage when landing a headshot.
+  rarity: EPIC
+  events:
+  - RANGED_HIT
+  - RANGED_MOB_HIT
+  applies-to:
+  - BOW
+  tiers:
+    1:
+      rate: 15
+      delay: 5
+      rules:
+      - '{event.headshot} = true => allow'
+      actions:
+      - boost_damage | 100 -> attacker
+    2:
+      rate: 20
+      delay: 5
+      rules:
+      - '{event.headshot} = true => allow'
+      actions:
+      - boost_damage | 100 -> attacker
+    3:
+      rate: 25
+      delay: 5
+      rules:
+      - '{event.headshot} = false => cancel'
+      actions:
+      - boost_damage | 100 -> attacker
+    4:
+      rate: 30
+      delay: 5
+      rules:
+      - '{event.headshot} = false => cancel'
+      actions:
+      - boost_damage | 100 -> attacker
+    5:
+      rate: 35
+      delay: 5
+      rules:
+      - '{event.headshot} = false => cancel'
+      actions:
+      - boost_damage | 100 -> attacker
+vital_stride:
+  title: Vital Stride
+  summary: Passively restores hunger while moving and fighting.
+  rarity: EPIC
+  events:
+  - PULSE
+  applies-to:
+  - HELMETS
+  tiers:
+    1:
+      rate: 30
+      delay: 0
+      actions:
+      - restore_hunger | 1
+    2:
+      rate: 50
+      delay: 0
+      actions:
+      - restore_hunger | 1
+    3:
+      rate: 70
+      delay: 0
+      actions:
+      - restore_hunger | 1
+vital_surge:
+  title: Vital Surge
+  summary: Increases maximum health while wearing the armor piece.
+  rarity: MYTHIC
+  events:
+  - ARMOR_PASSIVE
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 100
+      delay: 0
+      actions:
+      - grant_potion | HEALTH_BOOST | 0
+    2:
+      rate: 100
+      delay: 0
+      actions:
+      - grant_potion | HEALTH_BOOST | 1
+    3:
+      rate: 100
+      delay: 0
+      actions:
+      - grant_potion | HEALTH_BOOST | 2
+void_bane:
+  title: Void Bane
+  summary: Deals bonus damage against Endermen and Ender Dragons.
+  rarity: RARE
+  events:
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  - AXES
+  tiers:
+    1:
+      rate: 16
+      delay: 2
+      rules:
+      - '{mob.type} = ENDERMAN or {mob.type} = ENDER_DRAGON or {mob.type} = ENDER_DRAGON => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    2:
+      rate: 21
+      delay: 2
+      rules:
+      - '{mob.type} = ENDERMAN or {mob.type} = ENDER_DRAGON or {mob.type} = ENDER_DRAGON => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    3:
+      rate: 29
+      delay: 2
+      rules:
+      - '{mob.type} = ENDERMAN or {mob.type} = ENDER_DRAGON or {mob.type} = ENDER_DRAGON => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    4:
+      rate: 34
+      delay: 2
+      rules:
+      - '{mob.type} = ENDERMAN or {mob.type} = ENDER_DRAGON or {mob.type} = ENDER_DRAGON => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    5:
+      rate: 41
+      delay: 2
+      rules:
+      - '{mob.type} = ENDERMAN or {mob.type} = ENDER_DRAGON or {mob.type} = ENDER_DRAGON => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+void_grip:
+  title: Void Grip
+  summary: Transfers mined block drops directly into your inventory.
+  rarity: UNCOMMON
+  events:
+  - BLOCK_BREAK
+  applies-to:
+  - TOOLS
+  tiers:
+    1:
+      rate: 40
+      delay: 0
+      actions:
+      - magnetize_drops -> hit_block
+    2:
+      rate: 60
+      delay: 0
+      actions:
+      - magnetize_drops -> hit_block
+    3:
+      rate: 80
+      delay: 0
+      actions:
+      - magnetize_drops -> hit_block
+    4:
+      rate: 100
+      delay: 0
+      actions:
+      - magnetize_drops -> hit_block
+void_prowess:
+  title: Void Prowess
+  summary: Increases combat damage while fighting in the End.
+  rarity: EPIC
+  events:
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 25
+      delay: 0
+      rules:
+      - '{player.world} contains _END => allow'
+      actions:
+      - boost_damage | 50
+    2:
+      rate: 50
+      delay: 0
+      rules:
+      - '{player.world} contains _END => allow'
+      actions:
+      - boost_damage | 50
+    3:
+      rate: 75
+      delay: 0
+      rules:
+      - '{player.world} contains _END => allow'
+      actions:
+      - boost_damage | 50
+void_step:
+  title: Void Step
+  summary: Blinks behind your attacker when taking combat damage.
+  rarity: RARE
+  events:
+  - DEFEND_HIT
+  - DEFEND_MOB
+  applies-to:
+  - ARMOR
+  tiers:
+    1:
+      rate: 8
+      delay: 5
+      actions:
+      - blink_behind -> defender
+    2:
+      rate: 14
+      delay: 5
+      actions:
+      - blink_behind -> defender
+    3:
+      rate: 17
+      delay: 5
+      actions:
+      - blink_behind -> defender
+    4:
+      rate: 21
+      delay: 5
+      actions:
+      - blink_behind -> defender
+    5:
+      rate: 29
+      delay: 5
+      actions:
+      - blink_behind -> defender
+    6:
+      rate: 37
+      delay: 5
+      actions:
+      - blink_behind -> defender
+    7:
+      rate: 46
+      delay: 5
+      actions:
+      - blink_behind -> defender
+    8:
+      rate: 51
+      delay: 5
+      actions:
+      - blink_behind -> defender
+wave_stride:
+  title: Wave Stride
+  summary: Allows walking across water surfaces.
+  rarity: MYTHIC
+  events:
+  - ARMOR_PASSIVE
+  applies-to:
+  - BOOTS
+  tiers:
+    1:
+      rate: 100
+      delay: 0
+      actions:
+      - walk_on_water
+web_bane:
+  title: Web Bane
+  summary: Deals bonus damage against spiders.
+  rarity: RARE
+  events:
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  - AXES
+  tiers:
+    1:
+      rate: 25
+      delay: 2
+      rules:
+      - '{mob.type} = SPIDER => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    2:
+      rate: 50
+      delay: 2
+      rules:
+      - '{mob.type} = SPIDER => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+    3:
+      rate: 75
+      delay: 0
+      rules:
+      - '{mob.type} = SPIDER => allow'
+      actions:
+      - boost_damage | [rand | 10..40] -> attacker
+whiplash_line:
+  title: Whiplash Line
+  summary: Yanks hooked entities sharply toward your position.
+  rarity: RARE
+  events:
+  - FISH_CATCH
+  applies-to:
+  - FISHING_ROD
+  tiers:
+    1:
+      rate: 15
+      delay: 4
+      rules:
+      - '{event.caught} = PLAYER => allow'
+      actions:
+      - draw_closer | 1 -> defender
+    2:
+      rate: 25
+      delay: 6
+      rules:
+      - '{event.caught} = PLAYER => allow'
+      actions:
+      - draw_closer | 1.5 -> defender
+    3:
+      rate: 100
+      delay: 0
+      rules:
+      - '{event.caught} = PLAYER => allow'
+      actions:
+      - draw_closer | 2 -> defender
+wide_sweep:
+  title: Wide Sweep
+  summary: Strikes surrounding monsters within a wide melee arc.
+  rarity: EPIC
+  events:
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  - AXES
+  tiers:
+    1:
+      rate: 4
+      delay: 8
+      actions:
+      - inflict_damage | [rand | 1..2] -> area[range=7,filter=mobs]
+    2:
+      rate: 5
+      delay: 8
+      actions:
+      - inflict_damage | [rand | 1..2] -> area[range=2,filter=mobs]
+    3:
+      rate: 6
+      delay: 9
+      actions:
+      - inflict_damage | [rand | 1..3] -> area[range=3,filter=mobs]
+    4:
+      rate: 7
+      delay: 9
+      actions:
+      - inflict_damage | [rand | 1..3] -> area[range=4,filter=mobs]
+    5:
+      rate: 9
+      delay: 10
+      actions:
+      - inflict_damage | [rand | 2..3] -> area[range=5,filter=mobs]
+    6:
+      rate: 12
+      delay: 12
+      actions:
+      - inflict_damage | [rand | 2..3] -> area[range=6,filter=mobs]
+    7:
+      rate: 15
+      delay: 14
+      actions:
+      - inflict_damage | [rand | 2..3] -> area[range=7,filter=mobs]
+wildfire_ring:
+  title: Wildfire Ring
+  summary: Ignites and damages all nearby enemies in combat.
+  rarity: EPIC
+  events:
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 10
+      delay: 4
+      actions:
+      - emit_particles | FALLING_LAVA | 5 | 0 -> area[range=2,filter=mobs]
+      - ignite_target | 40 -> area[range=2,filter=mobs]
+    2:
+      rate: 12
+      delay: 5
+      actions:
+      - emit_particles | FALLING_LAVA | 5 | 0 -> area[range=4,filter=mobs]
+      - ignite_target | 50 -> area[range=4,filter=mobs]
+    3:
+      rate: 16
+      delay: 5
+      actions:
+      - emit_particles | FALLING_LAVA | 5 | 0 -> area[range=6,filter=mobs]
+      - ignite_target | 60 -> area[range=6,filter=mobs]
+wind_leap:
+  title: Wind Leap
+  summary: Boosts you skyward while gliding with an elytra.
+  rarity: MYTHIC
+  events:
+  - INTERACT_RIGHT
+  applies-to:
+  - ELYTRA
+  tiers:
+    1:
+      rate: 20
+      delay: 15
+      rules:
+      - '{player.held_item} contains FIREWORK => cancel'
+      actions:
+      - propel_entity | UP | 10
+    2:
+      rate: 40
+      delay: 10
+      rules:
+      - '{player.held_item} contains FIREWORK => cancel'
+      actions:
+      - propel_entity | UP | 12
+    3:
+      rate: 50
+      delay: 5
+      rules:
+      - '{player.held_item} contains FIREWORK => cancel'
+      actions:
+      - propel_entity | UP | 16
+wisdom_harvest:
+  title: Wisdom Harvest
+  summary: Boosts experience dropped by slain creatures.
+  rarity: MYTHIC
+  events:
+  - MOB_SLAY
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 30
+      delay: 4
+      actions:
+      - set_xp_drop | [calc | {event.xp} * (1.0 + 0.25 * {enchant.tier})] -> defender
+    2:
+      rate: 35
+      delay: 4
+      actions:
+      - set_xp_drop | [calc | {event.xp} * (1.0 + 0.25 * {enchant.tier})] -> defender
+    3:
+      rate: 40
+      delay: 4
+      actions:
+      - set_xp_drop | [calc | {event.xp} * (1.0 + 0.25 * {enchant.tier})] -> defender
+    4:
+      rate: 45
+      delay: 4
+      actions:
+      - set_xp_drop | [calc | {event.xp} * (1.0 + 0.25 * {enchant.tier})] -> defender
+wrist_lock:
+  title: Wrist Lock
+  summary: Forces the target's held weapon into their inventory.
+  rarity: CELESTIAL
+  events:
+  - RANGED_HIT
+  applies-to:
+  - BOW
+  - CROSSBOW
+  tiers:
+    1:
+      rate: 5
+      delay: 20
+      actions:
+      - disarm_hand -> defender
+    2:
+      rate: 10
+      delay: 20
+      actions:
+      - disarm_hand -> defender
+zero_knockback:
+  title: Zero Knockback
+  summary: Prevents your attacks from knocking the target away.
+  rarity: RARE
+  events:
+  - MOB_HIT
+  applies-to:
+  - SWORDS
+  tiers:
+    1:
+      rate: 40
+      delay: 0
+      actions:
+      - anchor_position -> defender
+    2:
+      rate: 80
+      delay: 0
+      actions:
+      - anchor_position -> defender
+    3:
+      rate: 100
+      delay: 0
+      actions:
+      - anchor_position -> defender

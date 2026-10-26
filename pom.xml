@@ -1,0 +1,32 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.github.lino9999</groupId>
+  <artifactId>customenchants</artifactId>
+  <version>1.0.0</version>
+  <name>CustomEnchants</name>
+  <description>Configurable custom enchantments, books, equipment and progression for Minecraft servers.</description>
+  <url>https://github.com/lino9999/CustomEnchants</url>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <bukkit.version>1.21.11-R0.1-SNAPSHOT</bukkit.version>
+    <project.build.outputTimestamp>2026-10-25T00:00:00Z</project.build.outputTimestamp>
+  </properties>
+  <repositories>
+    <repository><id>spigot</id><url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url></repository>
+  </repositories>
+  <dependencies>
+    <dependency><groupId>org.spigotmc</groupId><artifactId>spigot-api</artifactId><version>${bukkit.version}</version><scope>provided</scope></dependency>
+  </dependencies>
+  <build>
+    <finalName>CustomEnchants-${project.version}</finalName>
+    <resources>
+      <resource><directory>src/main/resources</directory><filtering>false</filtering><excludes><exclude>plugin.yml</exclude></excludes></resource>
+      <resource><directory>src/main/resources</directory><filtering>true</filtering><includes><include>plugin.yml</include></includes></resource>
+    </resources>
+    <plugins>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.14.1</version></plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.4.2</version></plugin>
+    </plugins>
+  </build>
+</project>

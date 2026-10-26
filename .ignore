@@ -1,0 +1,7 @@
+Plugin [Oo]riginale/
+.analysis/
+.tools/
+.verification/
+target/
+.git/
+assets/*.png

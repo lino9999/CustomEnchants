@@ -1,0 +1,87 @@
+general:
+  base-slots: 9
+  max-slots: 20
+  break-on-failure: false
+  excluded-worlds: []
+
+limits:
+  max-blocks: 256
+  max-targets: 256
+  max-delay-ticks: 400
+  pulse-interval-ticks: 20
+
+enchanting-table:
+  roll-chance: 45
+  tome-chance: 3
+  tiers:
+    tier-1:
+      min-enchants: 1
+      max-enchants: 1
+      level-cost: 0
+      rarities: [COMMON, UNCOMMON]
+    tier-2:
+      min-enchants: 1
+      max-enchants: 2
+      level-cost: 0
+      rarities: [RARE, EPIC]
+    tier-3:
+      min-enchants: 2
+      max-enchants: 3
+      level-cost: 0
+      rarities: [MYTHIC, CELESTIAL]
+
+chest-loot:
+  roll-chance: 0
+  max-rewards: 2
+  entries:
+    - tome:COMMON:50
+    - tome:UNCOMMON:30
+    - tome:RARE:10
+    - item:aegis_scroll:5
+    - item:soul_crystal:5:10
+
+villager-trades:
+  roll-chance: 0
+  entries:
+    - tome:UNCOMMON:70
+    - tome:RARE:25
+    - item:unbinding_scroll:5:80
+
+workstations:
+  combiner-xp-cost: 100
+  recycler-xp-reward: 50
+
+presets:
+  default-bleed-ticks: 20
+
+rarities:
+  COMMON:
+    label: Common
+    color: '&7'
+    cost: 400
+    currency: XP
+  UNCOMMON:
+    label: Uncommon
+    color: '&a'
+    cost: 800
+    currency: XP
+  RARE:
+    label: Rare
+    color: '&b'
+    cost: 1600
+    currency: XP
+  EPIC:
+    label: Epic
+    color: '&e'
+    cost: 3200
+    currency: XP
+  MYTHIC:
+    label: Mythic
+    color: '&6'
+    cost: 6400
+    currency: XP
+  CELESTIAL:
+    label: Celestial
+    color: '&d'
+    cost: 12800
+    currency: XP

@@ -1,0 +1,126 @@
+[SIZE=6][B]CustomEnchants documentation[/B][/SIZE]
+[B]Author: Lino[/B]
+
+[SIZE=5][B]Installation[/B][/SIZE]
+Download the JAR from GitHub Releases, place it in plugins/ and restart the server. Supported target range: Minecraft 1.21.11 through 26.3, Spigot or Paper. Use Java 21 on 1.21.11 and Java 25 on 26.x. Folia is not supported.
+
+[SIZE=5][B]Command format[/B][/SIZE]
+Use /customenchants, /ce or /cenchants. Lowercase enchantment and equipment IDs are used in commands; rarity IDs use uppercase. Each subcommand requires customenchants.SUBCOMMAND. Player-facing commands are available by default; administrative commands default to operators.
+
+[CODE]
+/ce help
+/ce enchants
+/ce info <enchantment>
+/ce shop
+/ce tinkerer
+/ce alchemist
+/ce sets
+/ce kits
+/ce kit <id>
+/ce rename <name>
+/ce withdraw <amount>
+/ce refresh
+/ce inspect
+
+/ce admin
+/ce editor <enchantment>
+/ce enchant <enchantment> <level>
+/ce remove <enchantment>
+/ce givebook <player> <enchantment> <level> [success] [destroy] [amount]
+/ce random <player> <rarity> [amount]
+/ce giveitem <player> <type> [amount] [value] [rarity]
+/ce giveset <player> <id>
+/ce giveweapon <player> <id>
+/ce givekit <player> <id>
+/ce resetkit <player> <id>
+/ce setsouls <amount>
+/ce open <player> <menu>
+/ce reload
+/ce effects
+/ce diagnostics
+[/CODE]
+
+[SIZE=5][B]Additional permissions[/B][/SIZE]
+[LIST]
+[*]customenchants.apply - apply tomes and merge enchanted equipment.
+[*]customenchants.items - use special items.
+[*]customenchants.kit.ID - claim a specific kit; grant this explicitly.
+[*]customenchants.* - grant command and item permissions.
+[*]customenchants.bypass.cooldown - bypass enchantment delays; operator default.
+[*]customenchants.bypass.souls - bypass soul consumption; operator default.
+[/LIST]
+
+[SIZE=5][B]Tomes and scrolls[/B][/SIZE]
+Pick up a custom tome and left-click a compatible single equipment item in your inventory. A valid attempt consumes one tome. Success binds its enchantment; destruction on failure is disabled by default and can be enabled in config.yml (`general.break-on-failure`). An `aegis_scroll` protects once against a failed tome; an `eternal_scroll` retains the item after one death. An `unbinding_scroll` extracts one random extractable enchantment into a tome.
+
+Anvil application costs three experience levels. Matching equipment items can merge their custom enchantments; equal tiers upgrade by one up to the maximum. Grindstones remove custom enchantments.
+
+[SIZE=5][B]Shop, recycler and combiner[/B][/SIZE]
+The enchanter shop sells random tomes by rarity. Rarity currency can be XP, LEVELS or MONEY. MONEY requires Vault and a compatible economy provider. Purchases are checked for inventory space before charging.
+
+In the recycler (`/ce tinkerer`), select custom tomes or enchanted equipment from your inventory and click Confirm. One item is consumed from each selected slot, with configured XP rewards. In the combiner (`/ce alchemist`), select two separate identical-tier tomes of the same enchantment, or two `arcane_dust` items from the same rarity. Confirm to pay the configured XP cost and receive the upgraded result.
+
+[SIZE=5][B]Special item IDs[/B][/SIZE]
+[CODE]
+aegis_scroll
+eternal_scroll
+unbinding_scroll
+arcane_dust
+sealed_dust
+inert_ash
+rate_crystal
+name_tag_scroll
+slot_expander
+armor_core
+weapon_core
+tool_core
+mining_counter
+angling_counter
+bounty_counter
+slayer_counter
+soul_harvester
+soul_crystal
+lore_sorter
+mystery_tome
+[/CODE]
+
+[CODE]
+/ce givebook Lino soul_siphon 3 100 0 1
+/ce giveitem Lino arcane_dust 1 10 MYTHIC
+/ce giveitem Lino soul_crystal 1 100
+/ce random Lino RARE 3
+[/CODE]
+
+[SIZE=5][B]Rarities, sets and kits[/B][/SIZE]
+Default rarities: COMMON, UNCOMMON, RARE, EPIC, MYTHIC, CELESTIAL.
+
+Set IDs: wayfarer, vanguard, wraith, warden, monarch, glacier, stormborn. All four marked pieces must be worn in their correct slots. Weapon IDs: wayfarer_cleaver, vanguard_greataxe, vanguard_longsword, wraith_reaver, monarch_saber.
+
+[SIZE=5][B]Configuration files[/B][/SIZE]
+[LIST]
+[*]config.yml - rarities, prices, slot limits, tome destruction, excluded worlds, performance bounds, table tiers and loot pools.
+[*]enchantments.yml - titles, summaries, applies-to materials, events, tiers, rate, delay, rules, prerequisites, incompatibilities and actions.
+[*]equipment.yml - armor sets, special weapons, model data, lore, enchantments and set bonuses.
+[*]kits.yml - kit contents and cooldowns.
+[*]messages.yml - English messages and prefix.
+[/LIST]
+
+[CODE]
+seraph_grace:
+  title: Seraph Grace
+  summary: Gradually mends your health after taking combat damage.
+  rarity: EPIC
+  events: [DEFEND_HIT, DEFEND_MOB]
+  applies-to: [CHESTPLATES]
+  tiers:
+    1:
+      rate: 15
+      delay: 4
+      actions:
+        - restore_health | 2 -> self
+[/CODE]
+
+[URL=https://github.com/lino9999/CustomEnchants/blob/main/docs/enchantments.md]Full enchantment catalog[/URL]
+[URL=https://github.com/lino9999/CustomEnchants/blob/main/docs/effects.md]Effect DSL reference[/URL]
+[URL=https://github.com/lino9999/CustomEnchants/blob/main/docs/configuration.md]Configuration guide[/URL]
+[URL=https://github.com/lino9999/CustomEnchants/blob/main/docs/verification.md]Verification record[/URL]

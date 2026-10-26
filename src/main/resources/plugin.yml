@@ -1,0 +1,155 @@
+name: CustomEnchants
+version: ${project.version}
+main: io.github.lino9999.customenchants.CustomEnchants
+api-version: '1.21'
+author: Lino
+description: Custom enchantments, tomes, souls, armor sets, weapons, and kits for Spigot servers.
+website: https://github.com/lino9999/CustomEnchants
+softdepend:
+- WorldGuard
+- Vault
+- PlaceholderAPI
+- ViaVersion
+- LuckPerms
+- mcMMO
+commands:
+  customenchants:
+    description: CustomEnchants command hub.
+    usage: /customenchants help
+    aliases:
+    - ce
+    - cenchants
+permissions:
+  customenchants.help:
+    default: true
+    description: Allows viewing the command help list.
+  customenchants.enchants:
+    default: true
+    description: Allows opening the enchantment catalog menu.
+  customenchants.info:
+    default: true
+    description: Allows inspecting an enchantment definition.
+  customenchants.shop:
+    default: true
+    description: Allows opening the enchantment tome shop.
+  customenchants.tinkerer:
+    default: true
+    description: Allows opening the recycler menu.
+  customenchants.alchemist:
+    default: true
+    description: Allows opening the combiner menu.
+  customenchants.sets:
+    default: true
+    description: Allows opening the armor sets preview menu.
+  customenchants.kits:
+    default: true
+    description: Allows opening the kits menu.
+  customenchants.kit:
+    default: true
+    description: Allows claiming permitted kits.
+  customenchants.rename:
+    default: true
+    description: Allows renaming held equipment with a name tag scroll.
+  customenchants.withdraw:
+    default: true
+    description: Allows withdrawing souls from held equipment into a soul crystal.
+  customenchants.refresh:
+    default: true
+    description: Allows refreshing passive equipment effects.
+  customenchants.inspect:
+    default: true
+    description: Allows inspecting custom data on held equipment.
+  customenchants.admin:
+    default: op
+    description: Allows opening the admin catalog menu.
+  customenchants.editor:
+    default: op
+    description: Allows opening the in-game enchantment editor.
+  customenchants.enchant:
+    default: op
+    description: Allows applying custom enchantments by command.
+  customenchants.remove:
+    default: op
+    description: Allows removing custom enchantments by command.
+  customenchants.givebook:
+    default: op
+    description: Allows giving custom enchantment tomes.
+  customenchants.random:
+    default: op
+    description: Allows giving random rarity tomes.
+  customenchants.giveitem:
+    default: op
+    description: Allows giving special upgrade items.
+  customenchants.giveset:
+    default: op
+    description: Allows giving custom armor sets.
+  customenchants.giveweapon:
+    default: op
+    description: Allows giving custom weapons.
+  customenchants.givekit:
+    default: op
+    description: Allows giving kits to players without cooldown checks.
+  customenchants.resetkit:
+    default: op
+    description: Allows resetting a player's kit cooldown.
+  customenchants.setsouls:
+    default: op
+    description: Allows setting the soul count on held equipment.
+  customenchants.open:
+    default: op
+    description: Allows opening a CustomEnchants menu for another player.
+  customenchants.reload:
+    default: op
+    description: Allows reloading CustomEnchants configuration files.
+  customenchants.effects:
+    default: op
+    description: Allows listing registered action operations.
+  customenchants.diagnostics:
+    default: op
+    description: Allows viewing runtime diagnostics.
+  customenchants.apply:
+    default: true
+    description: Allows applying enchantment tomes to equipment.
+  customenchants.items:
+    default: true
+    description: Allows using special scrolls, dusts, cores, and counters.
+  customenchants.bypass.cooldown:
+    default: op
+    description: Allows bypassing enchantment activation delays.
+  customenchants.bypass.souls:
+    default: op
+    description: Allows activating soul-consuming enchantments without spending souls.
+  customenchants.*:
+    default: op
+    children:
+      customenchants.help: true
+      customenchants.enchants: true
+      customenchants.info: true
+      customenchants.shop: true
+      customenchants.tinkerer: true
+      customenchants.alchemist: true
+      customenchants.sets: true
+      customenchants.kits: true
+      customenchants.kit: true
+      customenchants.rename: true
+      customenchants.withdraw: true
+      customenchants.refresh: true
+      customenchants.inspect: true
+      customenchants.admin: true
+      customenchants.editor: true
+      customenchants.enchant: true
+      customenchants.remove: true
+      customenchants.givebook: true
+      customenchants.random: true
+      customenchants.giveitem: true
+      customenchants.giveset: true
+      customenchants.giveweapon: true
+      customenchants.givekit: true
+      customenchants.resetkit: true
+      customenchants.setsouls: true
+      customenchants.open: true
+      customenchants.reload: true
+      customenchants.effects: true
+      customenchants.diagnostics: true
+      customenchants.apply: true
+      customenchants.items: true

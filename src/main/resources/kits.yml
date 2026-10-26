@@ -1,0 +1,47 @@
+wayfarer:
+  title: Wayfarer Kit
+  cooldown: 86400
+  contents:
+  - set:wayfarer
+  - weapon:wayfarer_cleaver
+vanguard:
+  title: Vanguard Kit
+  cooldown: 86400
+  contents:
+  - set:vanguard
+  - weapon:vanguard_greataxe
+  - weapon:vanguard_longsword
+wraith:
+  title: Wraith Kit
+  cooldown: 86400
+  contents:
+  - set:wraith
+  - weapon:wraith_reaver
+warden:
+  title: Warden Kit
+  cooldown: 86400
+  contents:
+  - set:warden
+monarch:
+  title: Monarch Kit
+  cooldown: 86400
+  contents:
+  - set:monarch
+  - weapon:monarch_saber
+glacier:
+  title: Glacier Kit
+  cooldown: 86400
+  contents:
+  - set:glacier
+stormborn:
+  title: Stormborn Kit
+  cooldown: 86400
+  contents:
+  - set:stormborn
+arcanist:
+  title: Arcanist Kit
+  cooldown: 3600
+  contents:
+  - tome:COMMON
+  - item:aegis_scroll:1
+  - item:arcane_dust:5

@@ -1,0 +1,10 @@
+Plugin [Oo]riginale/
+.analysis/
+.tools/
+.verification/
+target/
+*.log
+.idea/
+.vscode/
+*.iml
+.DS_Store
